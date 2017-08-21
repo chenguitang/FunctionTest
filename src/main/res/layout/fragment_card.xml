@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorFragmentBackground"
+    android:paddingLeft="10dp"
+    android:paddingTop="5dp"
+    tools:context="com.posin.fuctiontest.activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnOpen"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/cardOpen"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnDevReset"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/reset_device"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnBeep"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/beep"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cardExit"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorBlack" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp">
+
+            <Button
+                android:id="@+id/btnFindS50Card"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/findS50Card"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnGetCardID"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/readID"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnLoadKey"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/loadKey"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnHalt"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/halt"
+                android:textColor="#000"
+                android:visibility="gone"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <RadioGroup
+                android:id="@+id/rgCardType"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radS50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/s50"
+                    android:textColor="@color/colorBlack" />
+
+                <RadioButton
+                    android:id="@+id/radS70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/s70"
+                    android:textColor="@color/colorBlack" />
+
+                <RadioButton
+                    android:id="@+id/radUltralight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ul"
+                    android:textColor="@color/colorBlack" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnReadBlock"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/readBlock"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnWriteBlock"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/writeBlock"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnInitValue"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/blockInit"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnIncValue"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/incValue"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnDecValue"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/decValue"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnGetValue"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/selector_btn"
+                android:text="@string/read_block_value"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+            <Button
+                android:id="@+id/btnEncrypt"
+                android:layout_width="@dimen/btn_width_four_size"
+                android:layout_height="@dimen/btn_card_height_size"
+                android:background="@drawable/selector_btn"
+                android:text="@string/encrypt"
+                android:textColor="#000"
+                android:textSize="@dimen/btn_card_txt_size" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/colorBlack" />
+
+        <EditText
+            android:id="@+id/editLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:gravity="top|left"
+            android:inputType="none"
+            android:theme="@style/MyEditText">
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+</RelativeLayout>
