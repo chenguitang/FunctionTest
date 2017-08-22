@@ -23,7 +23,7 @@ import com.posin.fuctiontest.util.AppUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+public class MainActivity extends Activity implements View.OnClickListener,
         ViewPager.OnPageChangeListener {
 
     private static final String TAG = "MainActivity";
@@ -121,7 +121,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         iv_serial = (ImageView) findViewById(R.id.iv_serial);
         iv_card = (ImageView) findViewById(R.id.iv_card);
 
-
         iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
         iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
         iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
@@ -142,12 +141,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initPage() {
 
-        List<Fragment> list = new ArrayList<>();
-        list.add(0, new FragmentFunction());
-        list.add(1, new FragmentSerial());
-        list.add(2, new FragmentCard());
-        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), list);
-        mViewPager.setAdapter(adapter);
+//        List<Fragment> list = new ArrayList<>();
+//        list.add(0, new FragmentFunction());
+//        list.add(1, new FragmentSerial());
+//        list.add(2, new FragmentCard());
+//        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), list);
+        List<View> list = new ArrayList<>();
+        list.add(0,LayoutInflater.from(this).inflate(R.layout.fragment_function,null));
+        list.add(1,LayoutInflater.from(this).inflate(R.layout.fragment_serial,null));
+        list.add(2,LayoutInflater.from(this).inflate(R.layout.fragment_card,null));
+
+        mViewPager.setAdapter(new MyFragmentAdapter(this,list));
 
     }
 
