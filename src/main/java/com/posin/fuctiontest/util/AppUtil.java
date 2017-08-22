@@ -1,5 +1,6 @@
 package com.posin.fuctiontest.util;
 
+import android.app.Activity;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,7 +15,7 @@ public class AppUtil {
     /**
      * 隐藏虚拟按键，并且全屏
      */
-    public static void hideBottomUIMenu(AppCompatActivity activity) {
+    public static void hideBottomUIMenu(Activity activity) {
         //隐藏虚拟按键，并且全屏
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) { // lower api
             View v = activity.getWindow().getDecorView();

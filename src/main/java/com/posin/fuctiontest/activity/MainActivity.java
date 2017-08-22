@@ -1,41 +1,43 @@
 package com.posin.fuctiontest.activity;
 
+import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TabHost;
-import android.widget.TextView;
 
-import com.posin.device.SDK;
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.adapter.MyFragmentAdapter;
 import com.posin.fuctiontest.fragment.FragmentCard;
 import com.posin.fuctiontest.fragment.FragmentFunction;
 import com.posin.fuctiontest.fragment.FragmentSerial;
-import com.posin.fuctiontest.fragment.MyFragmentTabHost;
 import com.posin.fuctiontest.util.AppUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements TabHost.OnTabChangeListener, ViewPager.OnPageChangeListener, View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private MyFragmentTabHost mTabHost;
+
     private ViewPager mViewPager;
+    private LinearLayout ll_function;
+    private LinearLayout ll_serial;
+    private LinearLayout ll_card;
+    private ImageView iv_function;
+    private ImageView iv_serial;
+    private ImageView iv_card;
+
     private LayoutInflater layoutInflater;
-    private Button mBtnExit;
+
+
     private List<Fragment> list = new ArrayList<>();
 
     //Fragment列表
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //设置隐藏虚拟按键
@@ -62,9 +65,11 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
 
 
         initView();
+        initEvent();
         initPage();
 
     }
+
 
     @Override
     protected void onRestart() {
@@ -109,107 +114,68 @@ public class MainActivity extends AppCompatActivity implements TabHost.OnTabChan
      * 初始化页面
      */
     private void initView() {
-        layoutInflater = LayoutInflater.from(this);
 
         mViewPager = (ViewPager) findViewById(R.id.vp_pager);
-        mViewPager.addOnPageChangeListener(this);
+        ll_function = (LinearLayout) findViewById(R.id.ll_function);
+        ll_serial = (LinearLayout) findViewById(R.id.ll_serial);
+        ll_card = (LinearLayout) findViewById(R.id.ll_card);
+        iv_function = (ImageView) findViewById(R.id.iv_function);
+        iv_serial = (ImageView) findViewById(R.id.iv_serial);
+        iv_card = (ImageView) findViewById(R.id.iv_card);
 
-        mTabHost = (MyFragmentTabHost) findViewById(android.R.id.tabhost);
-        mTabHost.setup(this, getSupportFragmentManager(), R.id.vp_pager);
-        mBtnExit= (Button) findViewById(R.id.btnExit);
 
-        mTabHost.setOnTabChangedListener(this);
-        mBtnExit.setOnClickListener(this);
+        iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
+        iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
+        iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
 
-        //得到fragment的个数
-        int count = fragmentArray.length;
+    }
 
-        for (int i = 0; i < count; i++) {
-            //为每一个Tab按钮设置图标、文字和内容
-            TabHost.TabSpec tabSpec = mTabHost.newTabSpec(mTextviewArray[i]).
-                    setIndicator(getTabItemView(i));
-            mTabHost.addTab(tabSpec, fragmentArray[i], null);
-            mTabHost.setTag(i);
-            //设置Tab按钮的背景
-            mTabHost.getTabWidget().getChildAt(i).setBackgroundResource(
-                    R.drawable.selector_tab_background);
-        }
+
+    private void initEvent() {
+        ll_function.setOnClickListener(this);
+        ll_serial.setOnClickListener(this);
+        ll_card.setOnClickListener(this);
     }
 
     /**
      * 初始化ViewPager
      */
     private void initPage() {
-        FragmentFunction fgFunction = new FragmentFunction();
-        FragmentSerial fgSerial = new FragmentSerial();
-        FragmentCard fgCard = new FragmentCard();
 
-        list.add(fgFunction);
-        list.add(fgSerial);
-        list.add(fgCard);
+        List<Fragment> list = new ArrayList<>();
+        list.add(0, new FragmentFunction());
+        list.add(1, new FragmentSerial());
+        list.add(2, new FragmentCard());
+//        new MyFragmentAdapter(getFragmentManager(), list);
 
-        //绑定Fragment适配器
-        mViewPager.setAdapter(new MyFragmentAdapter(getSupportFragmentManager(), list));
-        //设置取消tabHost分割线
-        //mTabHost.getTabWidget().setDividerDrawable(null);
-    }
-
-
-    /**
-     * 给Tab按钮设置图标和文字
-     */
-    private View getTabItemView(int index) {
-
-        View view = layoutInflater.inflate(R.layout.tab_item_view, null);
-
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageview);
-        imageView.setImageResource(mImageViewArray[index]);
-
-        TextView textView = (TextView) view.findViewById(R.id.textview);
-        textView.setText(mTextviewArray[index]);
-
-        return view;
-    }
-
-    @Override
-    public void onTabChanged(String tabId) {
-        int position = mTabHost.getCurrentTab();
-        mViewPager.setCurrentItem(position);//把选中的Tab的位置赋给适配器，让它控制页面切换
+//        mViewPager.setAdapter();
 
     }
 
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        //表示在前一个页面滑动到后一个页面的时候，在前一个页面滑动前调用的方法
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-//        state，这事件是在你页面跳转完毕的时候调用的。
-//        TabWidget widget = mTabHost.getTabWidget();
-//        int oldFocusability = widget.getDescendantFocusability();
-//        设置View覆盖子类控件而直接获得焦点
-//        widget.setDescendantFocusability(ViewGroup.FOCUS_BLOCK_DESCENDANTS);
-        mTabHost.setCurrentTab(position);//根据位置Postion设置当前的Tab
-//        widget.setDescendantFocusability(oldFocusability);//设置取消分割线
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-        /*position ==1的时候表示正在滑动
-         *position==2的时候表示滑动完毕了
-         *position==0的时候表示什么都没做，就是停在那。
-         */
-    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnExit:
-                MainActivity.this.finish();
+        switch (v.getId()) {
+            case R.id.ll_function:
+                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
+                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
+                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
+
+
                 break;
-            default:
+            case R.id.ll_serial:
+                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
+                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_selected));
+                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
+
+
+                break;
+            case R.id.ll_card:
+                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
+                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
+                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_selected));
+
+
                 break;
         }
     }

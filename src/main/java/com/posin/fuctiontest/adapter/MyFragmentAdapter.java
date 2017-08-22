@@ -20,6 +20,8 @@ public class MyFragmentAdapter extends FragmentPagerAdapter {
         this.mList=list;
     }
 
+
+
     @Override
     public Fragment getItem(int position) {
         return mList.get(position);
