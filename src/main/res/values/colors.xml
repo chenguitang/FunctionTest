@@ -11,6 +11,7 @@
     <color name="colorDarkerGray">#BBBBBB</color>
     <color name="colorMoreDarkerGray">#817f7f</color>
     <color name="colorBtnTxt">#000000</color>
+    <color name="colorAppBackground">#FAFAFA</color>
 
 
 </resources>

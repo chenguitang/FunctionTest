@@ -12,6 +12,9 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/colorAppBackground</item>
+        <item name="background"
+        <item name="android:colorBackground">@color/colorAppBackground</item>
     </style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">

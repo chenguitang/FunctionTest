@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,10 +23,10 @@ import com.posin.fuctiontest.util.AppUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,
+        ViewPager.OnPageChangeListener {
 
     private static final String TAG = "MainActivity";
-
 
     private ViewPager mViewPager;
     private LinearLayout ll_function;
@@ -34,9 +35,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private ImageView iv_function;
     private ImageView iv_serial;
     private ImageView iv_card;
-
-    private LayoutInflater layoutInflater;
-
 
     private List<Fragment> list = new ArrayList<>();
 
@@ -135,6 +133,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         ll_function.setOnClickListener(this);
         ll_serial.setOnClickListener(this);
         ll_card.setOnClickListener(this);
+
+        mViewPager.addOnPageChangeListener(this);
     }
 
     /**
@@ -146,9 +146,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         list.add(0, new FragmentFunction());
         list.add(1, new FragmentSerial());
         list.add(2, new FragmentCard());
-//        new MyFragmentAdapter(getFragmentManager(), list);
-
-//        mViewPager.setAdapter();
+        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), list);
+        mViewPager.setAdapter(adapter);
 
     }
 
@@ -160,23 +159,49 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
                 iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
                 iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-
-
+                mViewPager.setCurrentItem(0);
                 break;
             case R.id.ll_serial:
                 iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
                 iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_selected));
                 iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-
-
+                mViewPager.setCurrentItem(1);
                 break;
             case R.id.ll_card:
                 iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
                 iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
                 iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_selected));
-
-
+                mViewPager.setCurrentItem(2);
                 break;
+        }
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (position == 1) {
+            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
+            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_selected));
+            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
+
+        } else if (position == 2) {
+            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
+            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
+            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_selected));
+
+        } else {
+            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
+            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
+            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
         }
     }
 }
