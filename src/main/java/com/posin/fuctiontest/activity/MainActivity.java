@@ -1,42 +1,48 @@
 package com.posin.fuctiontest.activity;
 
-import android.app.Activity;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.posin.fuctiontest.R;
-import com.posin.fuctiontest.adapter.MyFragmentAdapter;
+import com.posin.fuctiontest.adapter.TabLayoutAdapter;
 import com.posin.fuctiontest.fragment.FragmentCard;
+import com.posin.fuctiontest.fragment.FragmentCashDrawer;
+import com.posin.fuctiontest.fragment.FragmentCustomerDis;
 import com.posin.fuctiontest.fragment.FragmentFunction;
+import com.posin.fuctiontest.fragment.FragmentCardReader;
+import com.posin.fuctiontest.fragment.FragmentPrinter;
 import com.posin.fuctiontest.fragment.FragmentSerial;
 import com.posin.fuctiontest.util.AppUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends Activity implements View.OnClickListener,
-        ViewPager.OnPageChangeListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, TabLayout.OnTabSelectedListener {
 
     private static final String TAG = "MainActivity";
 
-    private ViewPager mViewPager;
-    private LinearLayout ll_function;
-    private LinearLayout ll_serial;
-    private LinearLayout ll_card;
-    private ImageView iv_function;
-    private ImageView iv_serial;
-    private ImageView iv_card;
+    @BindView(R.id.tab)
+    TabLayout mTab;
+    @BindView(R.id.viewpager)
+    ViewPager mViewPager;
+    @BindView(R.id.tv_select_fr)
+    TextView tv_select_fr;   //选中测试类
+    @BindView(R.id.tv_exit)
+    TextView tv_exit;  //退出
 
-    private List<Fragment> list = new ArrayList<>();
 
     //Fragment列表
     private Class fragmentArray[] = {FragmentFunction.class, FragmentSerial.class,
@@ -44,30 +50,68 @@ public class MainActivity extends Activity implements View.OnClickListener,
     //定义数组来存放按钮图片
     private int mImageViewArray[] = {R.drawable.selector_tab_function,
             R.drawable.selector_tab_serial, R.drawable.selector_tab_card};
-    //Tab选项卡的文字
-    private String mTextviewArray[] = {"功能测试", "串口测试", "IC卡测试"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
+        tv_select_fr.setText("打印机测试");
         //设置隐藏虚拟按键
         AppUtil.hideBottomUIMenu(MainActivity.this);
-
-
         //监听软键盘状态，隐藏键盘是，也隐藏底部按钮
         listenerInput();
 
-
-        initView();
         initEvent();
-        initPage();
+        initData();
 
     }
 
+    private void initEvent() {
+        tv_exit.setOnClickListener(this);
+        mTab.addOnTabSelectedListener(this);
+    }
+
+    private void initData() {
+        TabLayoutAdapter tabAdapter = new TabLayoutAdapter(this,
+                getSupportFragmentManager());
+        mViewPager.setAdapter(tabAdapter);
+        mTab.setupWithViewPager(mViewPager);
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_exit:
+                MainActivity.this.finish();
+                Toast.makeText(this, "退出应用", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+//        Toast.makeText(this, "选中的位置是： "+tab.getPosition(), Toast.LENGTH_SHORT).show();
+        String[] tab_title = getResources().getStringArray(R.array.tab_title);
+        tv_select_fr.setText(tab_title[tab.getPosition()]+"测试");
+        Log.e(TAG, "选中的位置是： " + tab.getPosition());
+    }
+
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
+
+    }
+
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 
     @Override
     protected void onRestart() {
@@ -108,104 +152,4 @@ public class MainActivity extends Activity implements View.OnClickListener,
 
     }
 
-    /**
-     * 初始化页面
-     */
-    private void initView() {
-
-        mViewPager = (ViewPager) findViewById(R.id.vp_pager);
-        ll_function = (LinearLayout) findViewById(R.id.ll_function);
-        ll_serial = (LinearLayout) findViewById(R.id.ll_serial);
-        ll_card = (LinearLayout) findViewById(R.id.ll_card);
-        iv_function = (ImageView) findViewById(R.id.iv_function);
-        iv_serial = (ImageView) findViewById(R.id.iv_serial);
-        iv_card = (ImageView) findViewById(R.id.iv_card);
-
-        iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
-        iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
-        iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-
-    }
-
-
-    private void initEvent() {
-        ll_function.setOnClickListener(this);
-        ll_serial.setOnClickListener(this);
-        ll_card.setOnClickListener(this);
-
-        mViewPager.addOnPageChangeListener(this);
-    }
-
-    /**
-     * 初始化ViewPager
-     */
-    private void initPage() {
-
-//        List<Fragment> list = new ArrayList<>();
-//        list.add(0, new FragmentFunction());
-//        list.add(1, new FragmentSerial());
-//        list.add(2, new FragmentCard());
-//        MyFragmentAdapter adapter = new MyFragmentAdapter(getSupportFragmentManager(), list);
-        List<View> list = new ArrayList<>();
-        list.add(0,LayoutInflater.from(this).inflate(R.layout.fragment_function,null));
-        list.add(1,LayoutInflater.from(this).inflate(R.layout.fragment_serial,null));
-        list.add(2,LayoutInflater.from(this).inflate(R.layout.fragment_card,null));
-
-        mViewPager.setAdapter(new MyFragmentAdapter(this,list));
-
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_function:
-                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
-                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
-                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-                mViewPager.setCurrentItem(0);
-                break;
-            case R.id.ll_serial:
-                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
-                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_selected));
-                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-                mViewPager.setCurrentItem(1);
-                break;
-            case R.id.ll_card:
-                iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
-                iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
-                iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_selected));
-                mViewPager.setCurrentItem(2);
-                break;
-        }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        if (position == 1) {
-            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
-            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_selected));
-            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-
-        } else if (position == 2) {
-            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_normal));
-            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
-            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_selected));
-
-        } else {
-            iv_function.setImageDrawable(getResources().getDrawable(R.mipmap.function_selected));
-            iv_serial.setImageDrawable(getResources().getDrawable(R.mipmap.serial_normal));
-            iv_card.setImageDrawable(getResources().getDrawable(R.mipmap.card_normal));
-        }
-    }
 }

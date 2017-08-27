@@ -34,11 +34,10 @@ import java.util.ArrayList;
  * Created by Greetty on 2017/8/8.
  */
 
-public class FragmentSerial extends Fragment {
+public class FragmentSerial extends BaseFragment {
 
     protected static final String TAG = "FragmentSerial";
 
-    private Context mContext =null ;
 
     private View view;
     private EditText mSendView;
@@ -92,24 +91,15 @@ public class FragmentSerial extends Fragment {
         }
     };
 
-    @Nullable
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    public View initView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_serial, null);
-
-        mContext=getContext();
-
         mSendView = (EditText) view.findViewById(R.id.editTextSend);
         mRecvView = (EditText) view.findViewById(R.id.editTextRecv);
         mRecvView.setEnabled(false);
 
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         // open / close
         mBtnOpenClose = (Button) view.findViewById(R.id.btnOpenClose);
         mBtnOpenClose.setOnClickListener(new View.OnClickListener() {
@@ -219,13 +209,7 @@ public class FragmentSerial extends Fragment {
                 onRecvTypeChanged(checkedId == R.id.radioRecvTypeText);
             }
         });
-
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "++++++++++++++++++++onActivityCreated++++++++++++++++++++");
+        return view;
     }
 
     private void postOnReceived(byte[] data) throws IOException {

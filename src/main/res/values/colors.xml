@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#00ae7d</color>
+    <color name="colorPrimaryDark">#00ae7d</color>
+    <color name="colorAccent">#aa00ae7d</color>
+    <color name="colorPrimaryTrans">#CC00ce7d</color>
 
     <color name="colorFragmentBackground">#e7e5e5</color>
     <color name="colorWhite">#FFFFFF</color>
@@ -12,6 +13,7 @@
     <color name="colorMoreDarkerGray">#817f7f</color>
     <color name="colorBtnTxt">#000000</color>
     <color name="colorAppBackground">#FAFAFA</color>
+    <color name="colorTabBackground">#F3F3F3</color>
 
 
 </resources>

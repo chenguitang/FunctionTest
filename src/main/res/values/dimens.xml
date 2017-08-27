@@ -9,4 +9,10 @@
     <dimen name="btn_height_size">45dp</dimen>
     <dimen name="btn_card_height_size">40dp</dimen>
     <dimen name="item_title_size">18sp</dimen>
+
+    <!--导航栏文字大小-->
+    <dimen name="tab_text_size">22sp</dimen>
+    <!--actionbar文字大小-->
+    <dimen name="actionbar_text_size">22sp</dimen>
+
 </resources>
