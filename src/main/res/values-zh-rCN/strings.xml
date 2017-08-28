@@ -21,8 +21,8 @@
     <string name="labelPrinterLED">打印机指示灯</string>
     <string name="labelErrorLED">错误指示灯</string>
     <string name="labelCashDrawerStatuePin">钱箱状态 (Pin3)</string>
-    <string name="btnCashDrawerOpen">开钱箱 (pin5)</string>
-    <string name="btnCashDrawerPin2">开钱箱 (pin2)</string>
+    <string name="btnCashDrawerOpen">开钱箱 \n (pin5)</string>
+    <string name="btnCashDrawerPin2">开钱箱 \n (pin2)</string>
     <string name="radioMsrKeyboardMode">键盘模式</string>
     <string name="radioMsrBroadcastMode">广播模式</string>
     <string name="btnMsrClearText">清空</string>
@@ -79,5 +79,8 @@
     <string name="encrypt">扇区加密</string>
     <string name="reset_device">设备复位</string>
     <string name="beep">蜂鸣器测试</string>
+
+    <string name="dialog_title">错误</string>
+
 
 </resources>

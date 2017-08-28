@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.posin.device.SDK;
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.adapter.TabLayoutAdapter;
 import com.posin.fuctiontest.fragment.FragmentCard;
@@ -43,13 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.tv_exit)
     TextView tv_exit;  //退出
 
+    private boolean mInited = false;  //是否已初始化
 
-    //Fragment列表
-    private Class fragmentArray[] = {FragmentFunction.class, FragmentSerial.class,
-            FragmentCard.class};
-    //定义数组来存放按钮图片
-    private int mImageViewArray[] = {R.drawable.selector_tab_function,
-            R.drawable.selector_tab_serial, R.drawable.selector_tab_card};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_select_fr.setText("打印机测试");
         //设置隐藏虚拟按键
         AppUtil.hideBottomUIMenu(MainActivity.this);
-        //监听软键盘状态，隐藏键盘是，也隐藏底部按钮
-        listenerInput();
 
         initEvent();
         initData();
@@ -72,6 +66,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initEvent() {
         tv_exit.setOnClickListener(this);
         mTab.addOnTabSelectedListener(this);
+
+        //监听软键盘状态，隐藏键盘是，也隐藏底部按钮
+        listenerInput();
     }
 
     private void initData() {
@@ -80,6 +77,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViewPager.setAdapter(tabAdapter);
         mTab.setupWithViewPager(mViewPager);
 
+        //初始化SDK
+        try {
+            if (mInited)
+                return;
+            SDK.init(this);
+            mInited = true;
+
+        } catch (Throwable throwable) {
+            Log.e(TAG, "error: " + throwable.getMessage());
+            throwable.printStackTrace();
+        }
     }
 
 
@@ -97,10 +105,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-//        Toast.makeText(this, "选中的位置是： "+tab.getPosition(), Toast.LENGTH_SHORT).show();
         String[] tab_title = getResources().getStringArray(R.array.tab_title);
-        tv_select_fr.setText(tab_title[tab.getPosition()]+"测试");
-        Log.e(TAG, "选中的位置是： " + tab.getPosition());
+        tv_select_fr.setText(tab_title[tab.getPosition()] + "测试");
+        Log.d(TAG, "选中的位置是： " + tab.getPosition());
     }
 
     @Override

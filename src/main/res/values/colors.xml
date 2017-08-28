@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#00ae7d</color>
     <color name="colorPrimaryDark">#00ae7d</color>
-    <color name="colorAccent">#aa00ae7d</color>
+    <color name="colorAccent">#00ae7d</color>
     <color name="colorPrimaryTrans">#CC00ce7d</color>
 
     <color name="colorFragmentBackground">#e7e5e5</color>
@@ -15,5 +15,9 @@
     <color name="colorAppBackground">#FAFAFA</color>
     <color name="colorTabBackground">#F3F3F3</color>
 
+
+    <color name="colorCircularNormal">#1ad29e</color>
+    <color name="colorCirNorStroke">#18b78a</color>
+    <color name="colorCircularStroke">#029f73</color>
 
 </resources>

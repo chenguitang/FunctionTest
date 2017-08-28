@@ -8,7 +8,7 @@
     <string name="btnPrint">Print</string>
     <string name="labelCustomerDisplay">Customer Display :</string>
     <string name="tfTextForPrint">Enter text for print .</string>
-    <string name="btnBacklight">Backlight On/Off</string>
+    <string name="btnBacklight">Backlight \n On/Off</string>
     <string name="btnReset">Reset</string>
     <string name="btnDspText">Display Text</string>
     <string name="labelCashDrawer">Cash Drawer :</string>
@@ -34,7 +34,7 @@
     <string name="btn_show_change">Change</string>
     <string name="btn_led_clear">Clear</string>
     <string name="btn_custdsp_clear">Clear</string>
-    <string name="btn_custdsp_displayimage">Display Image</string>
+    <string name="btn_custdsp_displayimage">Display \n Image</string>
 
     <string name="port">Port</string>
     <string name="baudrate">Baudrate</string>
@@ -77,6 +77,8 @@
     <string name="encrypt">Sector Encrypt</string>
     <string name="reset_device">Reset</string>
     <string name="beep">Beep</string>
+
+    <string name="dialog_title">ERROR</string>
 
 
 </resources>
