@@ -7,12 +7,258 @@
     android:orientation="vertical"
     android:weightSum="10">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent" />
+
+    <!--第三行-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="8">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="IC卡/ID卡"
+                android:textSize="20dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/cardOpen"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/reset_device"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/beep"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/findS50Card"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/findS50Card"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/readID"
+                    android:textSize="20dp" />
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/colorAccent" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/readBlock"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/writeBlock"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/blockInit"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/incValue"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/decValue"
+                    android:textSize="20dp" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/read_block_value"
+                    android:textSize="20dp" />
+                <View
+                    android:layout_width="1dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorAccent" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:text="@string/encrypt"
+                    android:textSize="20dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorAccent" />
+
+    <EditText
+        android:id="@+id/editLog1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:ems="9"
+        android:gravity="top|left"
+        android:inputType="none"
+        android:theme="@style/MyEditText"
+        android:visibility="visible">
+
+        <requestFocus />
+    </EditText>
+
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorAccent"
+        android:visibility="gone" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="10"
+        android:visibility="gone"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -50,10 +296,10 @@
                     android:id="@+id/btnDevReset"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
-                    android:textAllCaps="false"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/reset_device"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
 
@@ -69,9 +315,9 @@
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
-                    android:textAllCaps="false"
                     android:background="@drawable/selector_btn"
                     android:text="@string/beep"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
@@ -87,8 +333,8 @@
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
-                    android:textAllCaps="false"
                     android:text="@string/findS50Card"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
 
@@ -98,14 +344,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnGetCardID"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
-                    android:textAllCaps="false"
                     android:background="@drawable/selector_btn"
                     android:text="@string/readID"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
@@ -118,11 +365,11 @@
                 <Button
                     android:id="@+id/btnLoadKey"
                     android:layout_width="@dimen/btn_width_four_size"
-                    android:textAllCaps="false"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/loadKey"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
 
@@ -134,9 +381,9 @@
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
             android:background="@color/colorAccent"
             android:visibility="gone" />
 
@@ -149,19 +396,19 @@
             android:weightSum="8">
 
 
-
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnReadBlock"
                     android:layout_width="@dimen/btn_width_four_size"
-                    android:textAllCaps="false"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/readBlock"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
 
@@ -171,14 +418,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnWriteBlock"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
-                    android:textAllCaps="false"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/writeBlock"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
@@ -192,28 +440,29 @@
                     android:id="@+id/btnInitValue"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/blockInit"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/btn_card_txt_size"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnIncValue"
                     android:layout_width="@dimen/btn_width_four_size"
-                    android:textAllCaps="false"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
                     android:background="@drawable/selector_btn"
                     android:text="@string/incValue"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
@@ -222,14 +471,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnDecValue"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
-                    android:background="@drawable/selector_btn"
-                    android:textAllCaps="false"
                     android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
                     android:text="@string/decValue"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
@@ -238,17 +488,19 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
+
                 <Button
                     android:id="@+id/btnGetValue"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
                     android:layout_centerInParent="true"
-                    android:textAllCaps="false"
                     android:background="@drawable/selector_btn"
                     android:text="@string/read_block_value"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -258,10 +510,10 @@
                     android:id="@+id/btnEncrypt"
                     android:layout_width="@dimen/btn_width_four_size"
                     android:layout_height="@dimen/btn_card_height_size"
-                    android:background="@drawable/selector_btn"
-                    android:textAllCaps="false"
                     android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
                     android:text="@string/encrypt"
+                    android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/btn_card_txt_size" />
 
@@ -269,38 +521,15 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/view2"
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@color/colorAccent"
-            android:visibility="gone" />
-
-        <!--第三行-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="7"
-            android:layout_marginTop="@dimen/item_card_padding_bottom"
-            android:gravity="center">
-
-
-
-
-        </LinearLayout>
 
         <View
             android:id="@+id/view3"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
             android:background="@color/colorAccent"
             android:visibility="visible" />
 
