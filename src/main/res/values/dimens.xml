@@ -3,11 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="btn_txt_size">18sp</dimen>
-    <dimen name="btn_card_txt_size">15sp</dimen>
-    <dimen name="btn_width_four_size">120dp</dimen>
-    <dimen name="btn_width_two_size">90dp</dimen>
-    <dimen name="btn_height_size">45dp</dimen>
-    <dimen name="btn_card_height_size">40dp</dimen>
+    <dimen name="btn_card_txt_size">20sp</dimen>
+    <dimen name="btn_width_four_size">150dp</dimen>
+    <dimen name="btn_width_two_size">150dp</dimen>
+    <dimen name="btn_height_size">60dp</dimen>
+    <dimen name="btn_card_height_size">60dp</dimen>
     <dimen name="item_title_size">18sp</dimen>
 
     <!--导航栏文字大小-->
@@ -16,7 +16,12 @@
     <dimen name="actionbar_text_size">22sp</dimen>
 
     <dimen name="btn_text_size">20sp</dimen>
-    
+
+    <dimen name="rectangle_radius_size">12dp</dimen>
+
+    <!--打印机，钱箱，客显按钮距离底部输入框的高度-->
     <dimen name="item_padding_bottom">40dp</dimen>
+    <!--刷卡器行与行之间的高度-->
+    <dimen name="item_card_padding_bottom">15dp</dimen>
 
 </resources>

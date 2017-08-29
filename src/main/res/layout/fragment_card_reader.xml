@@ -1,11 +1,322 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:weightSum="10">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:text="打印机"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_weight="10"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!--第一行-->
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="7">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnOpen"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/cardOpen"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnDevReset"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:textAllCaps="false"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/reset_device"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnBeep"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:textAllCaps="false"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/beep"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnFindS50Card"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:textAllCaps="false"
+                    android:text="@string/findS50Card"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnGetCardID"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:textAllCaps="false"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/readID"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnLoadKey"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:textAllCaps="false"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/loadKey"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorAccent"
+            android:visibility="gone" />
+
+        <!--第二行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/item_card_padding_bottom"
+            android:weightSum="8">
+
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnReadBlock"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:textAllCaps="false"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/readBlock"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnWriteBlock"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:textAllCaps="false"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/writeBlock"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnInitValue"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/blockInit"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnIncValue"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:textAllCaps="false"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/incValue"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnDecValue"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:background="@drawable/selector_btn"
+                    android:textAllCaps="false"
+                    android:layout_centerInParent="true"
+                    android:text="@string/decValue"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <Button
+                    android:id="@+id/btnGetValue"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:layout_centerInParent="true"
+                    android:textAllCaps="false"
+                    android:background="@drawable/selector_btn"
+                    android:text="@string/read_block_value"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnEncrypt"
+                    android:layout_width="@dimen/btn_width_four_size"
+                    android:layout_height="@dimen/btn_card_height_size"
+                    android:background="@drawable/selector_btn"
+                    android:textAllCaps="false"
+                    android:layout_centerInParent="true"
+                    android:text="@string/encrypt"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/btn_card_txt_size" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorAccent"
+            android:visibility="gone" />
+
+        <!--第三行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="7"
+            android:layout_marginTop="@dimen/item_card_padding_bottom"
+            android:gravity="center">
+
+
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:background="@color/colorAccent"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ems="9"
+            android:gravity="top|left"
+            android:inputType="none"
+            android:theme="@style/MyEditText"
+            android:visibility="visible">
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
 
 </LinearLayout>
