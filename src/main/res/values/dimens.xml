@@ -24,4 +24,6 @@
     <!--刷卡器行与行之间的高度-->
     <dimen name="item_card_padding_bottom">15dp</dimen>
 
+    <dimen name="ic_card_navigate_height">120dp</dimen>
+
 </resources>

@@ -79,6 +79,9 @@
     <string name="beep">Beep</string>
 
     <string name="dialog_title">ERROR</string>
+    <string name="ic_card_test">IC Card \n Test</string>
+    <string name="id_card_test">MSR/ID \n Card Test</string>
+    <string name="ic_card_back">Back</string>
 
 
 </resources>

@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/item_padding_bottom"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:weightSum="6">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_car_ic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/selector_cir_btn"
+                android:text="@string/ic_card_test"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/btn_text_size" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/btn_card_id_msr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/selector_cir_btn"
+                android:text="@string/id_card_test"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/btn_text_size" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

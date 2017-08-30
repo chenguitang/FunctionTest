@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="7">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <!--按钮-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="6">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <!--清空按钮-->
+                    <Button
+                        android:id="@+id/btn_card_id_clear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/selector_cir_btn"
+                        android:text="@string/btnMsrClearText"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/btn_text_size" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <!--清空按钮-->
+                    <Button
+                        android:id="@+id/btn_card_id_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/selector_cir_btn"
+                        android:text="@string/ic_card_back"
+                        android:textAllCaps="false"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/btn_text_size" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <!--tip-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/labelMsr"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/item_title_size" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tfMsr"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/colorBlack" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--横线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorAccent" />
+
+        <!--信息显示文本框-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5">
+
+            <EditText
+                android:id="@+id/etMsr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.70"
+                android:ems="10"
+                android:gravity="top|left"
+                android:imeOptions="flagNoExtractUi|flagNoAccessoryAction|flagNoEnterAction"
+                android:inputType="none|textMultiLine"
+                android:minHeight="100dp"
+                android:textColor="@color/colorBlack"
+                android:theme="@style/MyEditText" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>
+
+

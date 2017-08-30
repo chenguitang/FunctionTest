@@ -82,5 +82,9 @@
 
     <string name="dialog_title">错误</string>
 
+    <string name="ic_card_test">IC卡测试</string>
+    <string name="id_card_test">磁条卡\nID卡测试</string>
+    <string name="ic_card_back">返回</string>
+
 
 </resources>
