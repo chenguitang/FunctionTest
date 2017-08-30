@@ -10,10 +10,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:background="@color/colorAccent" />
-
-    <!--第三行-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/ic_card_navigate_height"
@@ -41,7 +39,7 @@
                     android:clickable="true"
                     android:gravity="center"
                     android:text="@string/ic_card_back"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -55,7 +53,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/cardOpen"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -69,7 +67,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/reset_device"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -83,7 +81,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/beep"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -97,7 +95,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/findS50Card"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -111,7 +109,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/readID"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -125,8 +123,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/loadKey"
-                    android:textSize="20dp" />
-
+                    android:textSize="@dimen/btn_text_size" />
 
             </LinearLayout>
 
@@ -147,7 +144,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/readBlock"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -161,7 +158,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/writeBlock"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -175,7 +172,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/blockInit"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -189,7 +186,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/incValue"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -203,7 +200,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/decValue"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -217,7 +214,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/read_block_value"
-                    android:textSize="20dp" />
+                    android:textSize="@dimen/btn_text_size" />
 
                 <View
                     android:layout_width="1dp"
@@ -232,7 +229,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/encrypt"
-                    android:textSize="20dp"
+                    android:textSize="@dimen/btn_text_size"
                     android:visibility="visible" />
 
 

@@ -18,7 +18,7 @@
     </style>
 
     <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
         <item name="colorControlActivated">@color/colorAccent</item>
     </style>
 

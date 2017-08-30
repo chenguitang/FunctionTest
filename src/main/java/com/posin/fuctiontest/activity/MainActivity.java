@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mViewPager.setAdapter(tabAdapter);
         mTab.setupWithViewPager(mViewPager);
 
-        mTab.getTabAt(3).select();
+        mTab.getTabAt(4).select();
 
 
         //初始化SDK

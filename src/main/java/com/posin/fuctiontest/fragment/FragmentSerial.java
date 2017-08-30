@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,15 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.posin.fuctiontest.R;
 import com.minipos.device.SerialPort;
+import com.posin.fuctiontest.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -30,25 +30,60 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by Greetty on 2017/8/8.
+ * <p>
+ * 串口测试
  */
 
-public class FragmentSerial extends BaseFragment {
+public class FragmentSerial extends BaseFragment implements View.OnClickListener {
 
     protected static final String TAG = "FragmentSerial";
-
+    @BindView(R.id.tv_serial_port)
+    TextView tvSerialPort;
+    @BindView(R.id.tv_serial_baudrate)
+    TextView tvSerialBaudrate;
+    @BindView(R.id.tv_serial_open)
+    TextView tvSerialOpen;
+    @BindView(R.id.tv_serial_dataBits)
+    TextView tvSerialDataBits;
+    @BindView(R.id.tv_serial_stopBits)
+    TextView tvSerialStopBits;
+    @BindView(R.id.tv_serial_parity)
+    TextView tvSerialParity;
+    @BindView(R.id.tv_serial_flowControl)
+    TextView tvSerialFlowControl;
+    @BindView(R.id.radioSendTypeText)
+    RadioButton radioSendTypeText;
+    @BindView(R.id.radioSendTypeHex)
+    RadioButton radioSendTypeHex;
+    @BindView(R.id.radioGroupSendType)
+    RadioGroup radioGroupSendType;
+    @BindView(R.id.btnSend)
+    Button btnSend;
+    @BindView(R.id.editTextSend)
+    EditText editTextSend;
+    @BindView(R.id.radioRecvTypeText)
+    RadioButton radioRecvTypeText;
+    @BindView(R.id.radioRecvTypeHex)
+    RadioButton radioRecvTypeHex;
+    @BindView(R.id.radioGroupRecvType)
+    RadioGroup radioGroupRecvType;
+    @BindView(R.id.btnClear)
+    Button btnClear;
+    @BindView(R.id.radioGroupReceiveType)
+    LinearLayout radioGroupReceiveType;
+    @BindView(R.id.editTextRecv)
+    EditText editTextRecv;
+    @BindView(R.id.mainView)
+    ScrollView mainView;
+    Unbinder unbinder;
 
     private View view;
-    private EditText mSendView;
-    private EditText mRecvView;
-    private Button mBtnOpenClose;
-    private Button mBtnSelPort;
-    private Button mBtnSelBaudrate;
-    private Button mBtnSelDataBits;
-    private Button mBtnSelStopBits;
-    private Button mBtnSelParity;
-    private Button mBtnSelFlowControl;
 
     boolean mSendText = true;
     boolean mRecvText = true;
@@ -92,124 +127,43 @@ public class FragmentSerial extends BaseFragment {
     };
 
 
-
     @Override
     public View initView(LayoutInflater inflater) {
         view = inflater.inflate(R.layout.fragment_serial, null);
-        mSendView = (EditText) view.findViewById(R.id.editTextSend);
-        mRecvView = (EditText) view.findViewById(R.id.editTextRecv);
-        mRecvView.setEnabled(false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
+    }
 
-        // open / close
-        mBtnOpenClose = (Button) view.findViewById(R.id.btnOpenClose);
-        mBtnOpenClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                openCloseSerialPort();
-            }
-        });
+    @Override
+    public void initData() {
+        editTextRecv.setEnabled(false);
+    }
 
-        // select serial port
-        mBtnSelPort = (Button) view.findViewById(R.id.btnSelectPort);
-        mBtnSelPort.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectSerialPort();
-            }
-        });
+    @Override
+    public void initEvent() {
+        tvSerialPort.setOnClickListener(this);
+        tvSerialBaudrate.setOnClickListener(this);
+        tvSerialOpen.setOnClickListener(this);
+        tvSerialDataBits.setOnClickListener(this);
+        tvSerialStopBits.setOnClickListener(this);
+        tvSerialParity.setOnClickListener(this);
+        tvSerialFlowControl.setOnClickListener(this);
+        btnSend.setOnClickListener(this);
+        btnClear.setOnClickListener(this);
 
-        // select baudrate
-        mBtnSelBaudrate = (Button) view.findViewById(R.id.btnSelectBaudrate);
-        mBtnSelBaudrate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectBaudrate();
-            }
-        });
-
-        // select data bits
-        mBtnSelDataBits = (Button) view.findViewById(R.id.btnDataBits);
-        mBtnSelDataBits.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectDataBits();
-            }
-        });
-
-        // select stop bits
-        mBtnSelStopBits = (Button) view.findViewById(R.id.btnStopBits);
-        mBtnSelStopBits.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectStopBits();
-            }
-        });
-
-        // select parity
-        mBtnSelParity = (Button) view.findViewById(R.id.btnParity);
-        mBtnSelParity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectParity();
-            }
-        });
-
-        // select baudrate
-        mBtnSelFlowControl = (Button) view.findViewById(R.id.btnFlowControl);
-        mBtnSelFlowControl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                selectFlowControl();
-            }
-        });
-
-        Button btn;
-
-        // send data
-        btn = (Button) view.findViewById(R.id.btnSend);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                sendData();
-            }
-        });
-
-        // clear
-        btn = (Button) view.findViewById(R.id.btnClear);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                clearRecv();
-            }
-        });
-
-        // exit
-        btn = (Button) view.findViewById(R.id.btnExit);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                getActivity().finish();
-            }
-        });
-
-        RadioGroup rg;
-
-        rg = (RadioGroup) view.findViewById(R.id.radioGroupSendType);
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radioGroupSendType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 onSendTypeChanged(checkedId == R.id.radioSendTypeText);
             }
         });
 
-        rg = (RadioGroup) view.findViewById(R.id.radioGroupRecvType);
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radioGroupRecvType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 onRecvTypeChanged(checkedId == R.id.radioRecvTypeText);
             }
         });
-        return view;
     }
 
     private void postOnReceived(byte[] data) throws IOException {
@@ -226,6 +180,41 @@ public class FragmentSerial extends BaseFragment {
         mHandler.obtainMessage(MSG_ON_RECV_STOP).sendToTarget();
     }
 
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.tv_serial_open:
+                openCloseSerialPort();
+                break;
+            case R.id.tv_serial_port:
+                selectSerialPort();
+                break;
+            case R.id.tv_serial_baudrate:
+                selectBaudrate();
+                break;
+            case R.id.tv_serial_dataBits:
+                selectDataBits();
+                break;
+            case R.id.tv_serial_stopBits:
+                selectStopBits();
+                break;
+            case R.id.tv_serial_parity:
+                selectParity();
+                break;
+            case R.id.tv_serial_flowControl:
+                selectFlowControl();
+                break;
+            case R.id.btnSend:
+                sendData();
+                break;
+            case R.id.btnClear:
+                clearRecv();
+                break;
+            default:
+                break;
+        }
+    }
 
     /*
      * 用一个线程来一直接收数据
@@ -316,8 +305,8 @@ public class FragmentSerial extends BaseFragment {
                     } else {
                         Thread.sleep(50);
                     }
-					/*else if(size < 0){
-						//break;
+                    /*else if(size < 0){
+                        //break;
 						Thread.sleep(10);
 						continue;
 					} else {
@@ -329,36 +318,22 @@ public class FragmentSerial extends BaseFragment {
                 e.printStackTrace();
             }
         }
-    };
-
-
-    @Override
-    public void onStop() {
-        super.onStop();
     }
-
-    @Override
-    public void onDestroy() {
-        if (mSerialPort != null) {
-            mSerialPort.close();
-        }
-        super.onDestroy();
-//        System.exit(0);
-    }
+    ;
 
     void onSendTypeChanged(boolean sendText) {
         if (mSendText == sendText)
             return;
         mSendText = sendText;
-        String txt = mSendView.getText().toString();
+        String txt = editTextSend.getText().toString();
         if (txt == null || txt.length() == 0)
             return;
 
         try {
             if (mSendText)
-                mSendView.setText(new String(hexStringToBytes(txt)));
+                editTextSend.setText(new String(hexStringToBytes(txt)));
             else
-                mSendView.setText(bytesToHexString(txt.getBytes()));
+                editTextSend.setText(bytesToHexString(txt.getBytes()));
         } catch (Throwable e) {
             e.printStackTrace();
             Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -393,9 +368,10 @@ public class FragmentSerial extends BaseFragment {
             @Override
             protected void onOk() {
                 mPort = this.getSelection();
-                mBtnSelPort.setText("Port:" + mPort);
+                tvSerialPort.setText("Port:" + mPort);
                 Log.d(TAG, "sel port : " + mPort);
             }
+
         };
     }
 
@@ -406,7 +382,7 @@ public class FragmentSerial extends BaseFragment {
             @Override
             protected void onOk() {
                 mBaudrate = Integer.valueOf(getSelection());
-                mBtnSelBaudrate.setText("Baudrate:" + mBaudrate);
+                tvSerialBaudrate.setText("Baudrate:" + mBaudrate);
                 Log.d(TAG, "sel baudrates : " + getSelection() + ", " + mBaudrate);
             }
         };
@@ -419,7 +395,7 @@ public class FragmentSerial extends BaseFragment {
             @Override
             protected void onOk() {
                 mDataBits = Integer.valueOf(getSelection());
-                mBtnSelDataBits.setText("DataBits:" + mDataBits);
+                tvSerialDataBits.setText("DataBits:" + mDataBits);
                 Log.d(TAG, "sel databits : " + getSelection() + ", " + mDataBits);
             }
         };
@@ -440,7 +416,7 @@ public class FragmentSerial extends BaseFragment {
                 for (int i = 0; i < intStopbits.length; i++)
                     if (sel.equals(strStopbits[i]))
                         mStopBits = intStopbits[i];
-                mBtnSelStopBits.setText("StopBits:" + sel);
+                tvSerialStopBits.setText("StopBits:" + sel);
                 Log.d(TAG, "sel stopbits : " + sel + ", " + mStopBits);
             }
         };
@@ -461,7 +437,7 @@ public class FragmentSerial extends BaseFragment {
                 for (int i = 0; i < intParity.length; i++)
                     if (sel.equals(strParity[i]))
                         mParity = intParity[i];
-                mBtnSelParity.setText("Parity:" + sel);
+                tvSerialParity.setText("Parity:" + sel);
                 Log.d(TAG, "sel parity : " + sel + ", " + mParity);
             }
         };
@@ -482,7 +458,7 @@ public class FragmentSerial extends BaseFragment {
                 for (int i = 0; i < intFC.length; i++)
                     if (sel.equals(strFC[i]))
                         mFlowControl = intFC[i];
-                mBtnSelFlowControl.setText("FlowControl:" + sel);
+                tvSerialFlowControl.setText("FlowControl:" + sel);
                 Log.d(TAG, "sel flowcontrol : " + sel + ", " + mFlowControl);
             }
         };
@@ -508,26 +484,26 @@ public class FragmentSerial extends BaseFragment {
 //				cfg.parity = mParity;
 //				cfg.flowControl = SerialPort.FLOWCONTROL_RTSCTS;
 
-                Log.e(TAG, "mPort: "+mPort);
-                Log.e(TAG, "mBaudrate: "+mBaudrate);
-                Log.e(TAG, "mParity: "+mParity);
-                Log.e(TAG, "mDataBits: "+mDataBits);
-                Log.e(TAG, "mStopBits: "+mStopBits);
-                Log.e(TAG, "mFlowControl: "+mFlowControl);
+                Log.e(TAG, "mPort: " + mPort);
+                Log.e(TAG, "mBaudrate: " + mBaudrate);
+                Log.e(TAG, "mParity: " + mParity);
+                Log.e(TAG, "mDataBits: " + mDataBits);
+                Log.e(TAG, "mStopBits: " + mStopBits);
+                Log.e(TAG, "mFlowControl: " + mFlowControl);
 
 
                 mSerialPort = SerialPort.open(mPort, mBaudrate,
                         this.mParity, this.mDataBits, this.mStopBits, this.mFlowControl);
 
                 //mSerialPort = SerialPort.open(cfg, true);
-                mBtnOpenClose.setText("close");
+                tvSerialOpen.setText("close");
                 Log.e(TAG, "close.....");
                 //(new Thread(new SerialPortDataReceiver())).start();
                 mDataReceiver.start(mSerialPort.getInputStream());
                 //(new SerialPortDataReceiverThread(mSerialPort.getInputStream())).start();
             } catch (Throwable e) {
                 e.printStackTrace();
-                Log.e(TAG, "error: "+e.getMessage());
+                Log.e(TAG, "error: " + e.getMessage());
                 if (mSerialPort != null) {
                     mSerialPort.close();
                     mSerialPort = null;
@@ -538,7 +514,7 @@ public class FragmentSerial extends BaseFragment {
             mSerialPort.close();
             mSerialPort = null;
 
-            mBtnOpenClose.setText("open");
+            tvSerialOpen.setText("open");
 
             mDataReceiver.stop();
         }
@@ -550,7 +526,7 @@ public class FragmentSerial extends BaseFragment {
             return;
         }
 
-        String txt = mSendView.getText().toString();
+        String txt = editTextSend.getText().toString();
         try {
             byte[] data;
             if (mSendText)
@@ -572,7 +548,7 @@ public class FragmentSerial extends BaseFragment {
             //mRecvData.clear();
             mRecvStream.reset();
         }
-        mRecvView.getText().clear();
+        editTextRecv.getText().clear();
     }
 
     static int countByteArrayList(ArrayList<byte[]> data) {
@@ -600,7 +576,7 @@ public class FragmentSerial extends BaseFragment {
         }
 
         //mRecvView.setText(sb.toString());
-        mRecvView.setText(txt);
+        editTextRecv.setText(txt);
     }
 
     static String bytesToHexString(byte[] data) {
@@ -635,7 +611,7 @@ public class FragmentSerial extends BaseFragment {
     }
 
     private void showMsg(String title, String msg) {
-        android.content.DialogInterface.OnClickListener c = new android.content.DialogInterface.OnClickListener() {
+        DialogInterface.OnClickListener c = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -719,7 +695,7 @@ public class FragmentSerial extends BaseFragment {
                 final int row = i % num_row;
                 tr[row].addView(mBtns[i]);
             }
-			/*
+            /*
 			for(int i=0; i<items.length; i++) {
 				rb[i] = new RadioButton(context);
 				rb[i].setText(items[i]);
@@ -743,9 +719,7 @@ public class FragmentSerial extends BaseFragment {
 
         @Override
         protected View createView(Context context) {
-
             return (mView = new ScrollView(context));
-            //return (mRadioGroup = new RadioGroup(context));
         }
 
         public String getSelection() {
@@ -761,6 +735,28 @@ public class FragmentSerial extends BaseFragment {
                     mBtns[i].setChecked(rb == mBtns[i]);
             }
         };
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroy() {
+        if (mSerialPort != null) {
+            mSerialPort.close();
+        }
+        super.onDestroy();
+//        System.exit(0);
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
 }
