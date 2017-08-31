@@ -12,6 +12,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import com.posin.device.Printer;
 import com.posin.fuctiontest.R;
+import com.posin.fuctiontest.util.AppUtil;
 import com.posin.fuctiontest.util.BitImageEncoder;
 import com.posin.fuctiontest.util.UIUtil;
 
@@ -49,6 +50,7 @@ public class FragmentPrinter extends BaseFragment {
     private static final int BARCODE_WIDTH = 500;
     private static final int BARCODE_HEIGHT = 80;
 
+    private boolean isChinese = true;
 
     @Override
     public View initView(LayoutInflater inflater) {
@@ -60,6 +62,7 @@ public class FragmentPrinter extends BaseFragment {
     @Override
     public void initData() {
         loadPrinterProp();
+        isChinese = AppUtil.isZh(mContext);
     }
 
     /**
@@ -74,20 +77,22 @@ public class FragmentPrinter extends BaseFragment {
             OutputStream os = prt.getOutputStream();
 
             if (!prt.ready()) {
-                UIUtil.showMsg(mContext, "错误", "打印机未准备就绪!");
+                UIUtil.showMsg(mContext, isChinese ? "错误" : "Error",
+                        isChinese ? "打印机未准备就绪!" : "The printer is not ready");
                 return;
             }
             os.write(data);
             if (!prt.ready()) {
-                UIUtil.showMsg(mContext, "错误", "打印机未准备就绪!");
+                UIUtil.showMsg(mContext, isChinese ? "错误" : "Error",
+                        isChinese ? "打印机未准备就绪!" : "The printer is not ready");
                 return;
             } else
-                Toast.makeText(mContext, "打印机完成", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, isChinese ? "打印机完成" : "Printer complete", Toast.LENGTH_SHORT).show();
 
         } catch (Throwable e) {
             Log.e(TAG, "error: " + e.getMessage());
             e.printStackTrace();
-            Toast.makeText(mContext, "错误 : " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, isChinese ? "错误 : " : "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         } finally {
             if (prt != null) {
                 prt.close();
@@ -106,14 +111,15 @@ public class FragmentPrinter extends BaseFragment {
             if (prt.ready()) {
                 prt.write(CMD_CUT);
             } else {
-                Toast.makeText(mContext, "打印机未准备好", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, isChinese ? "打印机未准备好" : "The printer is not ready",
+                        Toast.LENGTH_SHORT).show();
             }
             //也可以调用cut();
             //prt.cut();
 
         } catch (Throwable e) {
             e.printStackTrace();
-            UIUtil.showMsg(mContext, "错误", e.getMessage());
+            UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
         } finally {
             if (prt != null) {
                 prt.close();
@@ -132,11 +138,12 @@ public class FragmentPrinter extends BaseFragment {
                 prt.getOutputStream().write((byte) '\n');
 //                prt.write("\n".getBytes());
             } else {
-                Toast.makeText(mContext, "打印机未准备好", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, isChinese ? "打印机未准备好" : "The printer is not ready",
+                        Toast.LENGTH_SHORT).show();
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            UIUtil.showMsg(mContext, "错误", e.getMessage());
+            UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
         } finally {
             if (prt != null) {
                 prt.close();
@@ -153,7 +160,8 @@ public class FragmentPrinter extends BaseFragment {
         try {
             String printTxt = et_print_input.getEditableText().toString();
             if (TextUtils.isEmpty(printTxt)) {
-                Toast.makeText(mContext, "请输入您要打印的内容。。。", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, isChinese ? "请输入您要打印的内容。。。" :
+                        "请输入您要打印的内容。。。", Toast.LENGTH_SHORT).show();
                 return;
             }
             prt = Printer.newInstance();
@@ -161,11 +169,12 @@ public class FragmentPrinter extends BaseFragment {
             if (prt.ready())
                 prt.print(printTxt + "\n");
             else {
-                Toast.makeText(mContext, "打印机未准备好", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, isChinese ? "打印机未准备好" : "The printer is not ready",
+                        Toast.LENGTH_SHORT).show();
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            UIUtil.showMsg(mContext, "错误", e.getMessage());
+            UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
         } finally {
             if (prt != null) {
                 prt.close();

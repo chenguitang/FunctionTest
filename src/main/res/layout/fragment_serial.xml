@@ -183,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/btn_height_size"
                     android:layout_marginLeft="10dp"
+                    android:textAllCaps="false"
                     android:background="@drawable/selector_btn"
                     android:text="@string/send"
                     android:textColor="@color/colorWhite"
@@ -199,7 +200,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:hint="发送的数据"
+                    android:hint="@string/serial_send_data"
                     android:imeOptions="normal|actionDone"
                     android:inputType="textMultiLine"
                     android:textColor="@color/colorBlack"
@@ -273,6 +274,7 @@
                         android:layout_marginLeft="10dp"
                         android:background="@drawable/selector_btn"
                         android:text="@string/clear"
+                        android:textAllCaps="false"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/btn_txt_size" />
                 </LinearLayout>
@@ -284,7 +286,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="接收到的数据"
+                android:hint="@string/serial_receive_data"
                 android:inputType="textMultiLine"
                 android:textColor="@color/colorBlack"
                 android:theme="@style/MyEditText" />

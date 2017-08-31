@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.posin.device.CustomerDisplay;
 import com.posin.fuctiontest.R;
+import com.posin.fuctiontest.util.AppUtil;
 import com.posin.fuctiontest.util.LedCustomerDisplay;
 import com.posin.fuctiontest.util.UIUtil;
 
@@ -178,12 +179,24 @@ public class FragmentCustomerDis extends BaseFragment {
     public void lcdSamplePage() {
         Log.i(TAG, "btnDspSample.click()");
 
-        String[] lines = {
-                "消费总额:   72.0",
-                "抹零金额:    0.0",
-                "实收金额:  100.0",
-                "找回金额:   28.0",
-        };
+        String[] lines = null;
+
+        if (AppUtil.isZh(mContext)) {
+            lines = new String[]{
+                    "消费总额:   72.0",
+                    "抹零金额:    0.0",
+                    "实收金额:  100.0",
+                    "找回金额:   28.0",
+            };
+        } else {
+            lines = new String[]{
+                    "Total   Amount: 72.0",
+                    "Wiping  Amount:  0.0",
+                    "Paid    Amount:100.0",
+                    "Recover Amount: 28.0",
+            };
+        }
+
 
         CustomerDisplay dsp = null;
 

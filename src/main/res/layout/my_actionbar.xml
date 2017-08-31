@@ -47,7 +47,7 @@
         android:id="@+id/tv_exit"
         android:layout_width="80dp"
         android:textColor="@color/colorWhite"
-        android:text="退出"
+        android:text="@string/exit"
         android:layout_marginRight="15dp"
         android:layout_gravity="center"
         android:gravity="center"

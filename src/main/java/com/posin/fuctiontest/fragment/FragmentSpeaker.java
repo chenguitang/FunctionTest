@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.activity.MainActivity;
+import com.posin.fuctiontest.global.AppConfig;
 import com.posin.fuctiontest.impl.TabReselectedListener;
 import com.posin.fuctiontest.view.MySeekBar;
 
@@ -64,7 +65,8 @@ public class FragmentSpeaker extends BaseFragment implements SeekBar.OnSeekBarCh
         sbSpeakerSize.setOnTouchListener(this);
 
         MainActivity mActivity = (MainActivity) getActivity();
-        String[] mTitle = mContext.getResources().getStringArray(R.array.tab_title);
+//        String[] mTitle = mContext.getResources().getStringArray(R.array.tab_title);
+        String[] mTitle = AppConfig.getTitleItem(mContext);
         for (int i = 0; i < mTitle.length; i++) {
             if (mTitle[i].equals("喇叭") || mTitle[i].equals("Horn"))
                 mSpeakerPos = i;

@@ -11,9 +11,9 @@
 
         <TextView
             android:id="@+id/textView02"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="扇区号 :"
+            android:text="@string/sector_number"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -32,9 +32,9 @@
 
         <TextView
             android:id="@+id/textView01"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="块号 :"
+            android:text="@string/block_number"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -52,9 +52,9 @@
 
         <TextView
             android:id="@+id/TextView01"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
-            android:text="值 :"
+            android:text="@string/block_value"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText

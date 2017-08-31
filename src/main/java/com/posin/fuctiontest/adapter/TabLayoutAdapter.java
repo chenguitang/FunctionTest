@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.fragment.FragmentFactory;
+import com.posin.fuctiontest.global.AppConfig;
 
 import java.util.List;
 
@@ -23,7 +24,8 @@ public class TabLayoutAdapter extends FragmentPagerAdapter {
     public TabLayoutAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.mContext = context;
-        mTitle = context.getResources().getStringArray(R.array.tab_title);
+//        mTitle = context.getResources().getStringArray(R.array.tab_title);
+        mTitle= AppConfig.getTitleItem(mContext);
     }
 
     @Override

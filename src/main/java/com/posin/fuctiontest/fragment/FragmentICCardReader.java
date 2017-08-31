@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.posin.device.Mifare;
 import com.posin.fuctiontest.R;
+import com.posin.fuctiontest.util.AppUtil;
 import com.posin.fuctiontest.util.ByteUtils;
 
 import java.text.SimpleDateFormat;
@@ -77,6 +78,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
 
     private Mifare mDev = null;
     private InputMethodManager mImm;
+    private boolean isChinese = true;
 
 
     @Override
@@ -92,6 +94,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
         mFragmentCardManager = new FragmentCardManager();
         fm = getFragmentManager();
 
+        isChinese = AppUtil.isZh(mContext);
         etIcLog.setFocusable(false);
         etIcLog.setClickable(false);
     }
@@ -180,15 +183,15 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                 mDev.close();
                 mDev = null;
 
-                tvIcOpen.setText("打开设备");
-                addLog("设备已关闭");
+                tvIcOpen.setText(isChinese ? "打开设备" : "Open");
+                addLog(isChinese ? "设备已关闭" : "Devices is off");
             } else {
                 // 如未打开则打开设备
                 mDev = Mifare.newInstance(Mifare.Device.RF400U);
                 mDev.open();
 
-                tvIcOpen.setText("关闭设备");
-                addLog("设备已打开");
+                tvIcOpen.setText(isChinese ? "关闭设备" : "Close");
+                addLog(isChinese ? "设备已打开" : "Devices is on");
             }
         } catch (Throwable e) {
             e.printStackTrace();
@@ -207,7 +210,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void resetDevice() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
@@ -215,10 +218,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             // 设备复位
             mDev.reset();
 
-            addLog("复位成功");
+            addLog(isChinese ? "复位成功" : "Reset success");
         } catch (Throwable e) {
             e.printStackTrace();
-            addLog("错误: " + e.getMessage());
+            addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
         } finally {
             addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
             addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -227,7 +230,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
 
     void beep() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
@@ -235,7 +238,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             mDev.beep(1);
         } catch (Throwable e) {
             e.printStackTrace();
-            addLog("错误: " + e.getMessage());
+            addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
         } finally {
 //			addLog("W : " + Utils.bytesToHex(mDev.getPkgWrite()));
 //			addLog("R : " + Utils.bytesToHex(mDev.getPkgRead()));
@@ -247,7 +250,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void detectCard() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
@@ -256,10 +259,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             mDev.detectCard();
 
             // 显示结果
-            addLog("寻卡成功");
+            addLog("Search card success");
         } catch (Throwable e) {
             e.printStackTrace();
-            addLog("错误: " + e.getMessage());
+            addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
         } finally {
             addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
             addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -271,7 +274,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void getCardID() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
@@ -280,10 +283,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             final byte[] id = mDev.getCardID();
 
             // 显示结果
-            addLog("获取ID成功, id = " + ByteUtils.bytesToHex(id));
+            addLog(isChinese ? "获取ID成功, id = " : "Get ID successful, id =" + ByteUtils.bytesToHex(id));
         } catch (Throwable e) {
             e.printStackTrace();
-            addLog("错误: " + e.getMessage());
+            addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
         } finally {
             addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
             addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -295,7 +298,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void halt() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
@@ -307,7 +310,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             addLog("停机成功");
         } catch (Throwable e) {
             e.printStackTrace();
-            addLog("错误: " + e.getMessage());
+            addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
         } finally {
             addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
             addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -319,12 +322,12 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void loadKey() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘密码输入对话框’
-        new KeyInputDialog(mContext, "输入密码", Mifare.KeyType.KeyA, mCurrentSector,
+        new KeyInputDialog(mContext, isChinese ? "输入密码" : "Enter password", Mifare.KeyType.KeyA, mCurrentSector,
                 "FF FF FF FF FF FF") {
             @Override
             /**
@@ -349,10 +352,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentSector = sector;
 
                     // 显示结果
-                    addLog("密码检验成功");
+                    addLog(isChinese ? "密码检验成功" : "Password verification is successful");
                 } catch (Throwable e) {
                     e.printStackTrace();
-                    addLog("错误 : " + e.getMessage());
+                    addLog(isChinese ? "错误 : " : "Error : " + e.getMessage());
                 } finally {
                     addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
                     addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -366,12 +369,12 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void readBlock() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘地址输入对话框’
-        new AddrInputDialog(mContext, "请输入", mCurrentSector, mCurrentBlock) {
+        new AddrInputDialog(mContext, isChinese ? "请输入" : "Please Enter", mCurrentSector, mCurrentBlock) {
             @Override
             /**
              * sectorNo : 扇区号
@@ -390,10 +393,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     // 显示结果
                     addLog("R[" + sectorNo + "," + blockNo + "]" + "=" +
                             ByteUtils.bytesToHex(data));
-                    addLog("读块成功");
+                    addLog(isChinese ? "读块成功" : "Read block is successful");
                 } catch (Throwable e) {
                     e.printStackTrace();
-                    addLog("错误 : " + e.getMessage());
+                    addLog(isChinese ? "错误 : " : "Error: " + e.getMessage());
                 } finally {
                     addLog("W : " + ByteUtils.bytesToHex(mDev.getPkgWrite()));
                     addLog("R : " + ByteUtils.bytesToHex(mDev.getPkgRead()));
@@ -407,12 +410,12 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void writeBlock() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘输入对话框’
-        new ValueInputDialog(mContext, "输入块值", mCurrentSector, mCurrentBlock
+        new ValueInputDialog(mContext, isChinese ? "输入块值" : "Enter Block Value", mCurrentSector, mCurrentBlock
                 , "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
                 InputType.TYPE_TEXT_VARIATION_NORMAL) {
             @Override
@@ -435,7 +438,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
 
                     // 显示结果
                     addLog("W[" + sectorNo + "," + blockNo + "]" + "=" + strValue);
-                    addLog("写块成功");
+                    addLog(isChinese ? "写块成功" : "Write block success");
 
                 } catch (Throwable e) {
                     e.printStackTrace();
@@ -453,12 +456,12 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void initValue() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘值输入对话框’
-        new ValueInputDialog(mContext, "输入值", mCurrentSector, mCurrentBlock, "0"
+        new ValueInputDialog(mContext, isChinese ? "输入值" : "Input value", mCurrentSector, mCurrentBlock, "0"
                 , InputType.TYPE_NUMBER_FLAG_DECIMAL) {
             @Override
             /**
@@ -478,7 +481,8 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog("初始化 [" + sectorNo + "," + blockNo + "] = " + value + "成功");
+                    addLog(isChinese ? "初始化 [" : "Initialization [" + sectorNo + ","
+                            + blockNo + "] = " + value + (isChinese ? "成功" : "Success"));
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -495,12 +499,14 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void incValue() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
+
             return;
         }
 
         // 显示 ‘地址输入对话框’
-        new AddrInputDialog(mContext, "需要增值的地址", mCurrentSector, mCurrentBlock) {
+        new AddrInputDialog(mContext, isChinese ? "需要增值的地址" : "Need to add value to the address",
+                mCurrentSector, mCurrentBlock) {
             @Override
             /**
              * sectorNo : 扇区号
@@ -517,7 +523,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog("增值成功");
+                    addLog(isChinese ? "增值成功" : "Value added success");
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -534,12 +540,13 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void decValue() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘地址输入对话框’
-        new AddrInputDialog(mContext, "需要减值的地址", mCurrentSector, mCurrentBlock) {
+        new AddrInputDialog(mContext, isChinese ? "需要减值的地址" : "Address that needs to" +
+                " be impaired", mCurrentSector, mCurrentBlock) {
             @Override
             /**
              * sectorNo : 扇区号
@@ -556,7 +563,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog("减值成功");
+                    addLog(isChinese ? "减值成功" : "Impairment success");
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -573,12 +580,12 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void getValue() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
         // 显示 ‘地址输入对话框’
-        new AddrInputDialog(mContext, "需要取值的地址", mCurrentSector, mCurrentBlock) {
+        new AddrInputDialog(mContext, isChinese ? "需要取值的地址" : "Need to take the address", mCurrentSector, mCurrentBlock) {
             @Override
             /**
              * sectorNo : 扇区号
@@ -594,7 +601,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog("取值成功 : [" + sectorNo + "," + blockNo + "] = " + value);
+                    addLog(isChinese ? "取值成功 : [" : "Successful value : [" + sectorNo + "," + blockNo + "] = " + value);
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -611,14 +618,14 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
      */
     void encrypt() {
         if (mDev == null) {
-            addLog("错误: 设备未打开");
+            addLog(isChinese ? "错误: 设备未打开" : "Error: Devices is off");
             return;
         }
 
 
         // 显示 ‘地址输入对话框’
-        new KeyUpdateDialog(mContext, "请输入", mCurrentSector, "FF FF FF FF FF FF", "FF FF FF FF FF FF"
-                , "FF 07 80 69") {
+        new KeyUpdateDialog(mContext, isChinese ? "请输入" : "Please Enter", mCurrentSector,
+                "FF FF FF FF FF FF", "FF FF FF FF FF FF", "FF 07 80 69") {
             @Override
             /**
              * sectorNo : 扇区号
@@ -638,7 +645,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentSector = sector;
 
                     // 显示结果
-                    addLog("密码更新成功");
+                    addLog(isChinese ? "密码更新成功" : "Password update is successful");
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -677,7 +684,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     .setTitle(title)
                     .setView(mView)
                     .setInverseBackgroundForced(true)
-                    .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    .setPositiveButton(isChinese ? "确定" : "Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mDlg.dismiss();
@@ -685,7 +692,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                             onOk();
                         }
                     })
-                    .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    .setNegativeButton(isChinese ? "取消" : "Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             mDlg.dismiss();
@@ -796,10 +803,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                         @Override
                         public void onCheckedChanged(RadioGroup group, int checkedId) {
                             if (checkedId == R.id.radKeyA) {
-                                addLog("选择 Key A");
+                                addLog(isChinese ? "选择 Key A" : "select Key A");
                                 mKeyType = Mifare.KeyType.KeyA;
                             } else if (checkedId == R.id.radKeyB) {
-                                addLog("选择 Key B");
+                                addLog(isChinese ? "选择 Key B" : "select Key B");
                                 mKeyType = Mifare.KeyType.KeyB;
                             }
                         }
@@ -859,6 +866,7 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             mImm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();

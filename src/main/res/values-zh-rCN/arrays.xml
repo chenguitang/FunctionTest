@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="tab_title">
+        <item>Printer</item>
+        <item>CustomerDisplay</item>
+        <item>CashDrawer</item>
+        <item>CardReader</item>
+        <item>Serial</item>
+        <item>Horn</item>
+        <item>Touch</item>
+        <item>Display</item>
+    </string-array>
+</resources>

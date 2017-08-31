@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/tvPrompt"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/sectorNo"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -33,7 +33,7 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/keyA"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -58,7 +58,7 @@
 
         <TextView
             android:id="@+id/TextView01"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/keyB"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -81,7 +81,7 @@
 
         <TextView
             android:id="@+id/TextView02"
-            android:layout_width="100dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="@string/controlbits"
             android:textAppearance="?android:attr/textAppearanceMedium" />

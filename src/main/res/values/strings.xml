@@ -92,8 +92,15 @@
     <string name="touch_test_tip">Click the touch screen test button to enter the test page,
         click anywhere on the screen,\n The screen will respond to the color dot,
         the number of clicks will automatically increase</string>
+
     <string name="display_test_tip">Click the display test button to enter the test page, \n click
         the screen form, the color of the table will change</string>
 
+    <string name="sector_number">Sector number:</string>
+    <string name="block_number">Block number:</string>
+    <string name="block_value">Value:</string>
+
+    <string name="serial_send_data">Transmitted data</string>
+    <string name="serial_receive_data">Received data</string>
 
 </resources>

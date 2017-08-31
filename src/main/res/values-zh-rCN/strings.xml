@@ -95,8 +95,15 @@
     <string name="touch_test_tip">点击触屏测试按钮进入测试页面，点击屏幕任意地方,\n屏幕会有响应的变色圆点，
         点击次数也会自动增加</string>
 
-     <string name="display_test_tip">点点击显示屏测试按钮进入测试页面，点击\n屏幕表格,
+    <string name="display_test_tip">点点击显示屏测试按钮进入测试页面，点击\n屏幕表格,
          表格的颜色会随之变化</string>
 
+    <string name="sector_number">扇区号</string>
+    <string name="block_number">块号</string>
+    <string name="block_value">值</string>
+
+
+    <string name="serial_send_data">发送的数据</string>
+    <string name="serial_receive_data">接收到的数据</string>
 
 </resources>

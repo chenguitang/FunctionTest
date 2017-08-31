@@ -1,9 +1,12 @@
 package com.posin.fuctiontest.util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import java.util.Locale;
 
 /**
  * Created by Greetty on 2017/8/8.
@@ -27,6 +30,20 @@ public class AppUtil {
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
+    }
+
+    /**
+     * 判断系统语言是否为中文
+     * @param context  context
+     * @return boolean
+     */
+    public static boolean isZh(Context context) {
+        Locale locale = context.getResources().getConfiguration().locale;
+        String language = locale.getLanguage();
+        if (language.endsWith("zh"))
+            return true;
+        else
+            return false;
     }
 
 }

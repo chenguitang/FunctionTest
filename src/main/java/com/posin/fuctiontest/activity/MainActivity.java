@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.posin.device.SDK;
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.adapter.TabLayoutAdapter;
+import com.posin.fuctiontest.global.AppConfig;
 import com.posin.fuctiontest.impl.TabReselectedListener;
 import com.posin.fuctiontest.util.AppUtil;
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager());
         mViewPager.setAdapter(tabAdapter);
         mTab.setupWithViewPager(mViewPager);
-        
+
 
         //初始化SDK
         try {
@@ -99,8 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        String[] tab_title = getResources().getStringArray(R.array.tab_title);
-        tv_select_fr.setText(tab_title[tab.getPosition()] + "测试");
+//        String[] tab_title = getResources().getStringArray(R.array.tab_title);
+        String[] tab_title= AppConfig.getTitleItem(this);
+        if (AppUtil.isZh(this) )
+            tv_select_fr.setText(tab_title[tab.getPosition()]+"测试" );
+        else
+            tv_select_fr.setText(tab_title[tab.getPosition()]+" Test" );
+
         if (mTabReselectedListener != null)
             mTabReselectedListener.TabReselectedChange(tab.getPosition());
         Log.d(TAG, "选中的位置是： " + tab.getPosition());
