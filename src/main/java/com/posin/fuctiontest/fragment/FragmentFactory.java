@@ -36,8 +36,10 @@ public class FragmentFactory {
                 case 6:
                     baseFragment = new FragmentTouch();//触摸屏触摸
                     break;
-                case 7:
-                    baseFragment = new FragmentDisplayScr();//屏幕显示
+//                case 7:
+//                    baseFragment = new FragmentDisplayScr();//屏幕显示
+//                    break;
+                default:
                     break;
             }
             mBaseFragments.put(position, baseFragment);

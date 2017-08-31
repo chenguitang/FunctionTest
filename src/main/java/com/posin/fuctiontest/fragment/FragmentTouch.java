@@ -42,7 +42,7 @@ public class FragmentTouch extends BaseFragment {
     @OnClick(R.id.btn_touch_main)
     public void touchMain(){
         Intent intent = new Intent(mContext, FullScreenActivity.class);
-        intent.putExtra("function", "touch_test_num");
+        intent.putExtra("function", "touch_test");
         mContext.startActivity(intent);
     }
 

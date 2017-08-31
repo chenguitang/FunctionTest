@@ -19,10 +19,10 @@ public class AppConfig {
      */
     public static String[] getTitleItem(Context context){
         if(AppUtil.isZh(context)){
-            return new String[]{"打印机","客显","钱箱","刷卡器","串口","喇叭","触屏","显示屏"};
+            return new String[]{"打印机","客显","钱箱","刷卡器","串口","喇叭","触屏"};
         }else{
             return new String[]{"Printer","CustomerDis","CashDrawer","CardReader",
-                    "Serial","Horn","Touch","Display"};
+                    "Serial","Horn","Touch"};
         }
     }
 }
