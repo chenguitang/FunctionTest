@@ -86,5 +86,17 @@
     <string name="id_card_test">磁条卡\nID卡测试</string>
     <string name="ic_card_back">返回</string>
 
+    <string name="speaker_start">播放</string>
+    <string name="speaker_stop">暂停</string>
+    <string name="speaker_volume">音量:</string>
+
+    <string name="touch_test">触屏测试</string>
+    <string name="screen_display_test">显示屏测试</string>
+    <string name="touch_test_tip">点击触屏测试按钮进入测试页面，点击屏幕任意地方,\n屏幕会有响应的变色圆点，
+        点击次数也会自动增加</string>
+
+     <string name="display_test_tip">点点击显示屏测试按钮进入测试页面，点击\n屏幕表格,
+         表格的颜色会随之变化</string>
+
 
 </resources>

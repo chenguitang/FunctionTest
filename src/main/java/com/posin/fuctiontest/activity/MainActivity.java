@@ -3,7 +3,6 @@ package com.posin.fuctiontest.activity;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,16 +15,8 @@ import android.widget.Toast;
 import com.posin.device.SDK;
 import com.posin.fuctiontest.R;
 import com.posin.fuctiontest.adapter.TabLayoutAdapter;
-import com.posin.fuctiontest.fragment.FragmentCard;
-import com.posin.fuctiontest.fragment.FragmentCashDrawer;
-import com.posin.fuctiontest.fragment.FragmentCustomerDis;
-import com.posin.fuctiontest.fragment.FragmentFunction;
-import com.posin.fuctiontest.fragment.FragmentCardReader;
-import com.posin.fuctiontest.fragment.FragmentPrinter;
-import com.posin.fuctiontest.fragment.FragmentSerial;
+import com.posin.fuctiontest.impl.TabReselectedListener;
 import com.posin.fuctiontest.util.AppUtil;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView tv_exit;  //退出
 
     private boolean mInited = false;  //是否已初始化
+    private TabReselectedListener mTabReselectedListener;
 
 
     @Override
@@ -76,9 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSupportFragmentManager());
         mViewPager.setAdapter(tabAdapter);
         mTab.setupWithViewPager(mViewPager);
-
-        mTab.getTabAt(4).select();
-
+        
 
         //初始化SDK
         try {
@@ -98,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_exit:
-                MainActivity.this.finish();
+//                MainActivity.this.finish();
+                System.exit(0);
                 Toast.makeText(this, "退出应用", Toast.LENGTH_SHORT).show();
                 break;
             default:
@@ -110,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onTabSelected(TabLayout.Tab tab) {
         String[] tab_title = getResources().getStringArray(R.array.tab_title);
         tv_select_fr.setText(tab_title[tab.getPosition()] + "测试");
+        if (mTabReselectedListener != null)
+            mTabReselectedListener.TabReselectedChange(tab.getPosition());
         Log.d(TAG, "选中的位置是： " + tab.getPosition());
     }
 
@@ -160,6 +153,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
+    }
+
+
+    public void setTabReselectedListener(TabReselectedListener tabReselectedListener) {
+        this.mTabReselectedListener = tabReselectedListener;
     }
 
 }

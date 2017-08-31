@@ -83,5 +83,17 @@
     <string name="id_card_test">MSR/ID \n Card Test</string>
     <string name="ic_card_back">Back</string>
 
+    <string name="speaker_start">Play</string>
+    <string name="speaker_stop">Stop</string>
+    <string name="speaker_volume">Volume:</string>
+    <string name="touch_test">Touch Test</string>
+    <string name="screen_display_test">Display Test</string>
+
+    <string name="touch_test_tip">Click the touch screen test button to enter the test page,
+        click anywhere on the screen,\n The screen will respond to the color dot,
+        the number of clicks will automatically increase</string>
+    <string name="display_test_tip">Click the display test button to enter the test page, \n click
+        the screen form, the color of the table will change</string>
+
 
 </resources>
