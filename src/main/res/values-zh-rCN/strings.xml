@@ -95,7 +95,7 @@
     <string name="touch_test_tip">点击触屏测试按钮进入测试页面，点击屏幕任意地方,\n屏幕会有响应的变色圆点，
         点击次数也会自动增加</string>
 
-    <string name="display_test_tip">点点击显示屏测试按钮进入测试页面，点击\n屏幕表格,
+    <string name="display_test_tip">点击显示屏测试按钮进入测试页面，点击\n屏幕表格,
          表格的颜色会随之变化</string>
 
     <string name="sector_number">扇区号</string>

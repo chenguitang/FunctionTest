@@ -21,13 +21,13 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.Properties;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.posin.fuctiontest.fragment.FragmentFunction.getSamplePage;
 
 /**
  * Created by Greetty on 2017/8/22.
@@ -209,6 +209,39 @@ public class FragmentPrinter extends BaseFragment {
         os.write(CMD_CUT);
 
         return os.toByteArray();
+    }
+
+
+    /**
+     * 生成测试页面
+     */
+    public static String getSamplePage() {
+        StringBuilder sb = new StringBuilder();
+
+        Date d = new Date();
+        String date = d.toLocaleString();
+
+        // 页面内容
+        sb.append('\n');
+        sb.append(date + "\n");
+        sb.append("Waiter : Alex.\n");
+        sb.append("Table  : T01,   Order#: 10132\n");
+        sb.append("Cust.Cat.: InHouse Clients   \n");
+        sb.append("------------------------------------------------\n");
+        sb.append("2 x  Duck Pancake                          1.2 \n");
+        sb.append("1 x  Fried Rice                            3.0 \n");
+        sb.append("1 x  Banana Fritter                        1.8 \n");
+        sb.append("1 x  Pineapple Fritter                     1.8 \n");
+        sb.append("1 x  Curry Sauce                           1.0 \n");
+        sb.append("2 x  Chilli Sauce                          1.0 \n");
+        sb.append("1 x  炒面 (大)                             2.9 \n");
+        sb.append("2 x  可乐(瓶装)                            1.3 \n");
+        sb.append("------------------------------------------------\n");
+        sb.append("Total Discount        MarkUp           Balance\n");
+        sb.append("16.20 0.00            0.00             16.20\n");
+        sb.append("\n");
+
+        return sb.toString();
     }
 
     /**

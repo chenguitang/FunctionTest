@@ -28,11 +28,11 @@ public class FullScreenActivity extends AppCompatActivity {
                     | 0x00001000;
 
     private void hidSysNavigation() {
-        if(Build.VERSION.SDK_INT > 10) {
+        if (Build.VERSION.SDK_INT > 10) {
             try {
                 View v = getWindow().getDecorView();
                 Method m = View.class.getMethod("setSystemUiVisibility", int.class);
-                m.invoke(v, new Object[] {SYSTEM_UI_FLAG_HIDE_NAVIGATION});
+                m.invoke(v, new Object[]{SYSTEM_UI_FLAG_HIDE_NAVIGATION});
                 //v.setSystemUiVisibility(SYSTEM_UI_FLAG_HIDE_NAVIGATION);
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -57,20 +57,25 @@ public class FullScreenActivity extends AppCompatActivity {
     private void initView() {
         View v = null;
         String func = this.getIntent().getStringExtra("function");
-        if("touch_test".equals(func)) {
-            v = new TouchTestView(this);
-        } else if("touch_test_num".equals(func)) {
+        if ("touch_test".equals(func)) {
+            v = new TouchTestView(this,FullScreenActivity.this);
+
+        } else if ("touch_test_num".equals(func)) {
             v = new TouchTestNumView(this);
         }
 
 //		v = new PageTouchTest.TouchTestView(this);
 
-        if(v != null) {
+        if (v != null) {
             v.setVisibility(View.VISIBLE);
             setContentView(v);
         } else {
             setContentView(R.layout.activity_full_screen);
         }
         v.requestFocus();
+    }
+
+    public void finishActivity(){
+        FullScreenActivity.this.finish();
     }
 }
