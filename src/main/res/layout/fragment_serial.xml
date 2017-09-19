@@ -7,7 +7,7 @@
     android:fadingEdge="vertical"
     android:overScrollMode="never"
     android:paddingTop="10dp"
-    tools:context="com.posin.fuctiontest.activity.MainActivity">
+    tools:context="com.posin.functiontest.activity.MainActivity">
 
     <LinearLayout
         android:id="@+id/tfDisplayText"

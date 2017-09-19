@@ -6,7 +6,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        applicationId "com.posin.fuctiontest"
+        applicationId "com.posin.functiontest"
         minSdkVersion 15
         targetSdkVersion 21
         versionCode 1

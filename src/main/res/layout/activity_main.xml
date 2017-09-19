@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.posin.fuctiontest.activity.MainActivity">
+    tools:context="com.posin.functiontest.activity.MainActivity">
 
     <include layout="@layout/my_actionbar" />
 
