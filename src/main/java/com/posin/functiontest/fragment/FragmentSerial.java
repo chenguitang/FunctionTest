@@ -482,12 +482,12 @@ public class FragmentSerial extends BaseFragment implements View.OnClickListener
 //				cfg.parity = mParity;
 //				cfg.flowControl = SerialPort.FLOWCONTROL_RTSCTS;
 
-                Log.e(TAG, "mPort: " + mPort);
-                Log.e(TAG, "mBaudrate: " + mBaudrate);
-                Log.e(TAG, "mParity: " + mParity);
-                Log.e(TAG, "mDataBits: " + mDataBits);
-                Log.e(TAG, "mStopBits: " + mStopBits);
-                Log.e(TAG, "mFlowControl: " + mFlowControl);
+                Log.d(TAG, "mPort: " + mPort);
+                Log.d(TAG, "mBaudrate: " + mBaudrate);
+                Log.d(TAG, "mParity: " + mParity);
+                Log.d(TAG, "mDataBits: " + mDataBits);
+                Log.d(TAG, "mStopBits: " + mStopBits);
+                Log.d(TAG, "mFlowControl: " + mFlowControl);
 
 
                 mSerialPort = SerialPort.open(mPort, mBaudrate,

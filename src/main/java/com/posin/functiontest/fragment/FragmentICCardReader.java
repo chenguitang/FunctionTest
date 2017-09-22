@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -32,6 +33,7 @@ import butterknife.Unbinder;
 
 public class FragmentICCardReader extends BaseFragment implements View.OnClickListener {
 
+    private static final String TAG = "FragmentICCardReader";
     private static final String IC_CARD_READER = "ic_card_reader";
 
     @BindView(R.id.tv_ic_card_back)
@@ -279,8 +281,13 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
             // 获取 卡的序列号
             final byte[] id = mDev.getCardID();
 
+            Log.d(TAG, "ByteUtils.bytesToHex(id): " + ByteUtils.bytesToHex(id));
+
             // 显示结果
-            addLog(isChinese ? "获取ID成功, id = " : "Get ID successful, id =" + ByteUtils.bytesToHex(id));
+            addLog(isChinese ? "获取ID成功, id = " + ByteUtils.bytesToHex(id) :
+                    "Get ID successful, id =" + ByteUtils.bytesToHex(id));
+
+
         } catch (Throwable e) {
             e.printStackTrace();
             addLog(isChinese ? "错误: " : "Error: " + e.getMessage());
@@ -478,8 +485,10 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog(isChinese ? "初始化 [" : "Initialization [" + sectorNo + ","
-                            + blockNo + "] = " + value + (isChinese ? "成功" : "Success"));
+                    addLog(isChinese ? "初始化 [" + sectorNo + ","
+                            + blockNo + "] = " + value + (isChinese ? "成功" : "Success") :
+                            "Initialization [" + sectorNo + ","
+                                    + blockNo + "] = " + value + (isChinese ? "成功" : "Success"));
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
@@ -598,7 +607,8 @@ public class FragmentICCardReader extends BaseFragment implements View.OnClickLi
                     mCurrentBlock = blockNo;
 
                     // 显示结果
-                    addLog(isChinese ? "取值成功 : [" : "Successful value : [" + sectorNo + "," + blockNo + "] = " + value);
+                    addLog(isChinese ? "取值成功 : [" + sectorNo + "," + blockNo + "] = " + value :
+                            "Successful value : [" + sectorNo + "," + blockNo + "] = " + value);
                 } catch (Throwable e) {
                     e.printStackTrace();
                     addLog(e.getMessage());
