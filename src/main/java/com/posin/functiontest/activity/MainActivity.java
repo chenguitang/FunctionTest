@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,12 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
+        //设置充满屏幕
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         tv_select_fr.setText("打印机测试");
-        //设置隐藏虚拟按键
-        AppUtil.hideBottomUIMenu(MainActivity.this);
 
         initEvent();
         initData();
@@ -59,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initEvent() {
         tv_exit.setOnClickListener(this);
         mTab.addOnTabSelectedListener(this);
-
-        //监听软键盘状态，隐藏键盘是，也隐藏底部按钮
-        listenerInput();
     }
 
     private void initData() {
@@ -101,11 +99,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
 //        String[] tab_title = getResources().getStringArray(R.array.tab_title);
-        String[] tab_title= AppConfig.getTitleItem(this);
-        if (AppUtil.isZh(this) )
-            tv_select_fr.setText(tab_title[tab.getPosition()]+"测试" );
+        String[] tab_title = AppConfig.getTitleItem(this);
+        if (AppUtil.isZh(this))
+            tv_select_fr.setText(tab_title[tab.getPosition()] + "测试");
         else
-            tv_select_fr.setText(tab_title[tab.getPosition()]+" Test" );
+            tv_select_fr.setText(tab_title[tab.getPosition()] + " Test");
 
         if (mTabReselectedListener != null)
             mTabReselectedListener.TabReselectedChange(tab.getPosition());
@@ -129,38 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e(TAG, "onRestart");
 
     }
-
-    /**
-     * 监听软键盘状态
-     */
-    private void listenerInput() {
-        final LinearLayout ll_main = (LinearLayout) findViewById(R.id.activity_main);
-
-        ll_main.getViewTreeObserver().addOnGlobalLayoutListener(
-                new ViewTreeObserver.OnGlobalLayoutListener() {
-                    @Override
-                    public void onGlobalLayout() {
-                        Rect rect = new Rect();
-                        ll_main.getWindowVisibleDisplayFrame(rect);
-                        int rootInvisibleHeight = ll_main.getRootView().getHeight() - rect.bottom;
-                        Log.d(TAG, "lin.getRootView().getHeight()=" + ll_main.getRootView().getHeight() +
-                                ",rect.bottom=" + rect.bottom + ",rootInvisibleHeight=" + rootInvisibleHeight);
-                        if (rootInvisibleHeight <= 100) {
-                            //软键盘隐藏啦
-//                            Toast.makeText(MainActivity.this, "软键盘隐藏啦。。。。。。。",
-//                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            ////软键盘弹出啦
-//                    Toast.makeText(MainActivity.this, "软键盘弹出啦。。。。。。。",
-//                            Toast.LENGTH_SHORT).show();
-                            AppUtil.hideBottomUIMenu(MainActivity.this);
-                        }
-
-                    }
-                });
-
-    }
-
 
     public void setTabReselectedListener(TabReselectedListener tabReselectedListener) {
         this.mTabReselectedListener = tabReselectedListener;
