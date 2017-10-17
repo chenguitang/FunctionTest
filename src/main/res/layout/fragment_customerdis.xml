@@ -162,8 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="4"
                         android:text="@string/tfDisplayText"
-                        android:hint="@string/tfDisplayText"
-                        android:inputType="text|number" />
+                        android:hint="@string/tfDisplayText"/>
 
                 </LinearLayout>
 

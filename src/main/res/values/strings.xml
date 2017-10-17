@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FuctionTest</string>
+    <string name="app_name">FunctionTest</string>
     <string name="action_settings">Settings</string>
     <string name="btnSamplePage">Sample Page</string>
     <string name="labelPrinter">Printer :</string>
