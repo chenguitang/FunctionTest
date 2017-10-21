@@ -6,7 +6,7 @@
     <dimen name="btn_card_txt_size">20sp</dimen>
     <dimen name="btn_width_four_size">150dp</dimen>
     <dimen name="btn_width_two_size">150dp</dimen>
-    <dimen name="btn_height_size">60dp</dimen>
+    <dimen name="btn_height_size">50dp</dimen>
     <dimen name="btn_card_height_size">60dp</dimen>
     <dimen name="item_title_size">18sp</dimen>
 
@@ -20,9 +20,10 @@
     <dimen name="rectangle_radius_size">12dp</dimen>
 
     <!--打印机，钱箱，客显按钮距离底部输入框的高度-->
-    <dimen name="item_padding_bottom">40dp</dimen>
-    <!--刷卡器行与行之间的高度-->
+    btn_text_size    <!--刷卡器行与行之间的高度-->
     <dimen name="item_card_padding_bottom">15dp</dimen>
+
+    <dimen name="item_padding_bottom">15dp</dimen>
 
     <dimen name="ic_card_navigate_height">120dp</dimen>
 

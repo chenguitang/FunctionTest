@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onRestart() {
         super.onRestart();
-        AppUtil.hideBottomUIMenu(MainActivity.this);
+//        AppUtil.hideBottomUIMenu(MainActivity.this);
         Log.e(TAG, "onRestart");
 
     }

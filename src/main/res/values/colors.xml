@@ -19,5 +19,8 @@
     <color name="colorCircularNormal">#1ad29e</color>
     <color name="colorCirNorStroke">#18b78a</color>
     <color name="colorCircularStroke">#029f73</color>
+    <color name="colorEdiTextBackground">#F6F6F6</color>
+    <color name="colorEdiTextNormalStroke">#C6C6C6</color>
+
 
 </resources>

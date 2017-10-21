@@ -103,6 +103,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:background="@color/colorAccent" />
 
@@ -110,18 +111,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5">
+            android:layout_margin="5dp"
+            android:layout_weight="4.8">
 
             <EditText
                 android:id="@+id/etMsr"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2.70"
                 android:ems="10"
                 android:gravity="top|left"
                 android:imeOptions="flagNoExtractUi|flagNoAccessoryAction|flagNoEnterAction"
                 android:inputType="none|textMultiLine"
-                android:minHeight="100dp"
+                android:background="@drawable/selector_editext_background"
                 android:textColor="@color/colorBlack"
                 android:theme="@style/MyEditText" />
 
