@@ -53,6 +53,7 @@
         android:textColor="@color/colorWhite"
         android:text="@string/exit"
         android:layout_gravity="center"
+        android:background="@drawable/select_textview_bg"
         android:gravity="center"
         android:clickable="true"
         android:textSize="@dimen/actionbar_text_size"
