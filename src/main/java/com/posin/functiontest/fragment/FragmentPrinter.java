@@ -1,6 +1,9 @@
 package com.posin.functiontest.fragment;
 
 
+import android.os.Handler;
+import android.os.Message;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,6 +42,9 @@ public class FragmentPrinter extends BaseFragment {
 
     private static final String TAG = "FragmentPrinter";
     private static boolean mIsSerialPortPrinter = false;
+    private static final int PRINT_ERROR = 111; //打印出错了
+    private static final int PRINTER_UNREADY = 112;  //打印机未准备就绪
+    private static final int PRINTER_COMPLETE = 113; //打印完成
 
     private static final byte[] CMD_LINE_FEED = {0x0a};
     private static final byte[] CMD_INIT = {0x1B, 0x40};
@@ -51,6 +57,35 @@ public class FragmentPrinter extends BaseFragment {
     private static final int BARCODE_HEIGHT = 80;
 
     private boolean isChinese = true;
+    private boolean mInPrinting = false;
+
+    private Printer prt = null;
+
+
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case PRINT_ERROR:
+                    Throwable e = (Throwable) msg.obj;
+//                    Toast.makeText(mContext, isChinese ? "错误: " + e.getMessage() : "Error: " +
+//                            e.getMessage(), Toast.LENGTH_SHORT).show();
+                    UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
+                    break;
+                case PRINTER_UNREADY:
+                    UIUtil.showMsg(mContext, isChinese ? "错误" : "Error",
+                            isChinese ? "打印机未准备就绪!" : "The printer is not ready");
+                    break;
+                case PRINTER_COMPLETE:
+                    Toast.makeText(mContext, isChinese ? "打印机完成" : "Printer complete",
+                            Toast.LENGTH_SHORT).show();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
 
     @Override
     public View initView(LayoutInflater inflater) {
@@ -70,29 +105,53 @@ public class FragmentPrinter extends BaseFragment {
      */
     @OnClick(R.id.btn_print_samplePage)
     public void printSamplePage() {
-        Printer prt = null;
+        if (mInPrinting) {
+            Toast.makeText(mContext, isChinese ? "正在打印,请等待打印完成后再重新测试...." :
+                            "It's printing. Please wait for the printing to complete and retest it.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        mInPrinting = true;
+
         try {
-            byte[] data = genSamplePage2();
+            final byte[] data = genSamplePage2();
             prt = Printer.newInstance();
-            OutputStream os = prt.getOutputStream();
+            final OutputStream os = prt.getOutputStream();
 
             if (!prt.ready()) {
                 UIUtil.showMsg(mContext, isChinese ? "错误" : "Error",
                         isChinese ? "打印机未准备就绪!" : "The printer is not ready");
+                mInPrinting = false;
                 return;
             }
-            os.write(data);
-            if (!prt.ready()) {
-                UIUtil.showMsg(mContext, isChinese ? "错误" : "Error",
-                        isChinese ? "打印机未准备就绪!" : "The printer is not ready");
-                return;
-            } else
-                Toast.makeText(mContext, isChinese ? "打印机完成" : "Printer complete", Toast.LENGTH_SHORT).show();
+
+            //子线程发送打印数据，因为该数据量较大
+            new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        os.write(data);
+
+                        if (!prt.ready()) {
+                            mHandler.obtainMessage(PRINTER_UNREADY).sendToTarget();
+                        } else
+                            mHandler.obtainMessage(PRINTER_COMPLETE).sendToTarget();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        mHandler.obtainMessage(PRINT_ERROR, e).sendToTarget();
+                    } finally {
+                        mInPrinting = false;
+                    }
+                }
+            }.start();
 
         } catch (Throwable e) {
             Log.e(TAG, "error: " + e.getMessage());
             e.printStackTrace();
-            Toast.makeText(mContext, isChinese ? "错误 : " : "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, isChinese ? "错误 : " + e.getMessage() :
+                    "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            mInPrinting = false;
         } finally {
             if (prt != null) {
                 prt.close();
@@ -103,6 +162,14 @@ public class FragmentPrinter extends BaseFragment {
 
     @OnClick(R.id.btn_print_cut)
     public void printCut() {
+        if (mInPrinting) {
+            Toast.makeText(mContext, isChinese ? "正在打印,请等待打印完成后再重新测试...." :
+                            "It's printing. Please wait for the printing to complete and retest it.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mInPrinting = true;
+
         Printer prt = null;
         try {
             final byte[] CMD_CUT = {0x1D, 0x56, 0x01};
@@ -121,6 +188,7 @@ public class FragmentPrinter extends BaseFragment {
             e.printStackTrace();
             UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
         } finally {
+            mInPrinting = false;
             if (prt != null) {
                 prt.close();
             }
@@ -130,6 +198,13 @@ public class FragmentPrinter extends BaseFragment {
 
     @OnClick(R.id.btn_print_freed)
     public void printFreed() {
+        if (mInPrinting) {
+            Toast.makeText(mContext, isChinese ? "正在打印,请等待打印完成后再重新测试...." :
+                            "It's printing. Please wait for the printing to complete and retest it.",
+                    Toast.LENGTH_SHORT).show();
+            return;
+        }
+        mInPrinting = true;
         Printer prt = null;
         try {
             prt = Printer.newInstance();
@@ -145,6 +220,7 @@ public class FragmentPrinter extends BaseFragment {
             e.printStackTrace();
             UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
         } finally {
+            mInPrinting = false;
             if (prt != null) {
                 prt.close();
             }
@@ -156,30 +232,47 @@ public class FragmentPrinter extends BaseFragment {
 
     @OnClick(R.id.btn_print_printTxt)
     public void printPrintTxt() {
-        Printer prt = null;
-        try {
-            String printTxt = et_print_input.getEditableText().toString();
-            if (TextUtils.isEmpty(printTxt)) {
-                Toast.makeText(mContext, isChinese ? "请输入您要打印的内容。。。" :
-                        "请输入您要打印的内容。。。", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            prt = Printer.newInstance();
-
-            if (prt.ready())
-                prt.print(printTxt + "\n");
-            else {
-                Toast.makeText(mContext, isChinese ? "打印机未准备好" : "The printer is not ready",
-                        Toast.LENGTH_SHORT).show();
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-            UIUtil.showMsg(mContext, isChinese ? "错误" : "Error", e.getMessage());
-        } finally {
-            if (prt != null) {
-                prt.close();
-            }
+        if (mInPrinting) {
+            Toast.makeText(mContext, isChinese ? "正在打印,请等待打印完成后再重新测试...." :
+                            "It's printing. Please wait for the printing to complete and retest it.",
+                    Toast.LENGTH_SHORT).show();
+            return;
         }
+        mInPrinting = true;
+
+        final String printTxt = et_print_input.getEditableText().toString();
+        if (TextUtils.isEmpty(printTxt)) {
+            Toast.makeText(mContext, isChinese ? "请输入您要打印的内容。。。" :
+                    "请输入您要打印的内容。。。", Toast.LENGTH_SHORT).show();
+            mInPrinting = false;
+            return;
+        }
+
+        new Thread() {
+            @Override
+            public void run() {
+                Printer prt = null;
+                try {
+                    prt = Printer.newInstance();
+
+                    if (prt.ready())
+                        prt.print(printTxt + "\n");
+                    else {
+                        mHandler.obtainMessage(PRINTER_UNREADY).sendToTarget();
+                    }
+                    mInPrinting = false;
+                    Log.e(TAG, "print text mInPrinting: "+mInPrinting);
+
+                } catch (Throwable e) {
+                    e.printStackTrace();
+                    mHandler.obtainMessage(PRINT_ERROR, e).sendToTarget();
+                } finally {
+                    if (prt != null) {
+                        prt.close();
+                    }
+                }
+            }
+        }.start();
     }
 
     /**
@@ -199,9 +292,9 @@ public class FragmentPrinter extends BaseFragment {
 
         if (!mIsSerialPortPrinter) {
             os.write(CMD_ALIGN_CENTER);
-            os.write(BitImageEncoder.genBarcodePrinterCommand("ABCD0123456789012345",
+            os.write(BitImageEncoder.genBarcodePrinterCommand("6955885000208",
                     BARCODE_WIDTH, BARCODE_HEIGHT));
-            os.write("ABCD0123456789012345\n\n".getBytes());
+            os.write("6955885000208\n\n".getBytes());
 
             os.write(BitImageEncoder.genQrcodePrinterCommand(ErrorCorrectionLevel.H,
                     "QRCode. 二维码测试.", QRCODE_SIZE, QRCODE_SIZE));
