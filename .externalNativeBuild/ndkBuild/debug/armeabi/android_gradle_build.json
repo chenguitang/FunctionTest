@@ -1,7 +1,7 @@
 {
   "buildFiles": [
-    "D:\\work\\android\\SystemProject\\FunctionTest-20171218\\src\\main\\jni\\Android.mk",
-    "D:\\work\\android\\SystemProject\\FunctionTest-20171218\\src\\main\\jni\\Application.mk"
+    "D:\\work\\android\\SystemProject\\FunctionTest-20180112\\src\\main\\jni\\Android.mk",
+    "D:\\work\\android\\SystemProject\\FunctionTest-20180112\\src\\main\\jni\\Application.mk"
   ],
   "cleanCommands": [],
   "libraries": {},

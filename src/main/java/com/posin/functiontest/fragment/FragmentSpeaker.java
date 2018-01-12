@@ -8,11 +8,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.posin.functiontest.R;
 import com.posin.functiontest.activity.MainActivity;
 import com.posin.functiontest.global.AppConfig;
 import com.posin.functiontest.impl.TabReselectedListener;
+import com.posin.functiontest.util.AppUtil;
 
 import java.io.IOException;
 
@@ -121,6 +123,17 @@ public class FragmentSpeaker extends BaseFragment implements SeekBar.OnSeekBarCh
                         }
                     }
                 });
+                player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        player.reset();
+                        player = null;
+                        isPlaying = false;
+                        isPause = false;
+                        Toast.makeText(mContext, AppUtil.isZh(mContext) ? "播放完成" :
+                                "player complete", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } catch (IOException e) {
                 Log.e(TAG, "error: " + e.getMessage());
                 e.printStackTrace();
@@ -189,7 +202,7 @@ public class FragmentSpeaker extends BaseFragment implements SeekBar.OnSeekBarCh
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
 
                 break;
