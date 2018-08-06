@@ -52,6 +52,7 @@
     <string name="findS50Card">Detect Card</string>
     <string name="s50">S50</string>
     <string name="s70">S70</string>
+    <string name="hello_world">Hello world!</string>
     <string name="ul">Ultralight</string>
     <string name="readID">Read SN</string>
     <string name="halt">Halt</string>

@@ -2,13 +2,12 @@
 <resources>
 
     <string-array name="tab_title">
-        <item>打印机</item>
-        <item>客显</item>
-        <item>钱箱</item>
-        <item>刷卡器</item>
-        <item>串口</item>
-        <item>喇叭</item>
-        <item>触屏</item>
-        <item>显示屏</item>
+        <item>Printer</item>
+        <item>CustomerDis</item>
+        <item>CashDrawer</item>
+        <item>CardReader</item>
+        <item>Serial</item>
+        <item>Horn</item>
+        <item>Touch</item>
     </string-array>
 </resources>

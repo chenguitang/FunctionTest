@@ -1,11 +1,33 @@
 {
   "buildFiles": [
-    "D:\\work\\android\\SystemProject\\FunctionTest-20180112\\src\\main\\jni\\Android.mk",
-    "D:\\work\\android\\SystemProject\\FunctionTest-20180112\\src\\main\\jni\\Application.mk"
+    "D:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Android.mk",
+    "D:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Application.mk"
   ],
-  "cleanCommands": [],
-  "libraries": {},
-  "toolchains": {},
+  "cleanCommands": [
+    "D:\\program\\Android\\android-ndk-r13\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dD:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dD:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDEBUG\u003d1 APP_PLATFORM\u003dandroid-15 NDK_OUT\u003dD:/work/android/SystemProject/FunctionTest/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003dD:\\work\\android\\SystemProject\\FunctionTest\\build\\intermediates\\ndkBuild\\debug\\lib clean"
+  ],
+  "libraries": {
+    "SerialPortTest-debug-armeabi": {
+      "buildCommand": "D:\\program\\Android\\android-ndk-r13\\ndk-build.cmd NDK_PROJECT_PATH\u003dnull APP_BUILD_SCRIPT\u003dD:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Android.mk NDK_APPLICATION_MK\u003dD:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\Application.mk APP_ABI\u003darmeabi NDK_ALL_ABIS\u003darmeabi NDEBUG\u003d1 APP_PLATFORM\u003dandroid-15 NDK_OUT\u003dD:/work/android/SystemProject/FunctionTest/build/intermediates/ndkBuild/debug/obj NDK_LIBS_OUT\u003dD:\\work\\android\\SystemProject\\FunctionTest\\build\\intermediates\\ndkBuild\\debug\\lib D:/work/android/SystemProject/FunctionTest/build/intermediates/ndkBuild/debug/obj/local/armeabi/libSerialPortTest.so",
+      "toolchain": "toolchain-armeabi",
+      "abi": "armeabi",
+      "artifactName": "SerialPortTest",
+      "files": [
+        {
+          "src": "D:\\work\\android\\SystemProject\\FunctionTest\\src\\main\\jni\\SerialPortTest.cpp",
+          "flags": "\"-gcc-toolchain\" \"D:/program/Android/android-ndk-r13/build//../toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64\" \"-fpic\" \"-ffunction-sections\" \"-funwind-tables\" \"-fstack-protector-strong\" \"-Wno-invalid-command-line-argument\" \"-Wno-unused-command-line-argument\" \"-no-canonical-prefixes\" \"-fno-integrated-as\" \"-g\" \"-target\" \"armv5te-none-linux-androideabi\" \"-march\u003darmv5te\" \"-mtune\u003dxscale\" \"-msoft-float\" \"-fno-exceptions\" \"-fno-rtti\" \"-mthumb\" \"-Os\" \"-DNDEBUG\" \"-ID:/program/Android/android-ndk-r13/build//../sources/cxx-stl/stlport/stlport\" \"-ID:/program/Android/android-ndk-r13/build//../sources/cxx-stl//gabi++/include\" \"-ID:/work/android/SystemProject/FunctionTest/src/main/jni\" \"-DANDROID\" \"-Wa,--noexecstack\" \"-Wformat\" \"-Werror\u003dformat-security\" \"-frtti\" \"-isystem\" \"D:/program/Android/android-ndk-r13/build//../platforms/android-15/arch-arm/usr/include\""
+        }
+      ],
+      "output": "D:\\work\\android\\SystemProject\\FunctionTest\\build\\intermediates\\ndkBuild\\debug\\obj\\local\\armeabi\\libSerialPortTest.so"
+    }
+  },
+  "toolchains": {
+    "toolchain-armeabi": {
+      "cppCompilerExecutable": "D:\\program\\Android\\android-ndk-r13\\build\\..\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
   "cFileExtensions": [],
-  "cppFileExtensions": []
+  "cppFileExtensions": [
+    "cpp"
+  ]
 }
