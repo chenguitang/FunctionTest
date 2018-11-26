@@ -7,6 +7,7 @@
 7         android:endColor="#CCCCCC"
 8         android:startColor="#CCCCCC" /> -->
 
+    <!-- 边距 -->
     <padding
         android:bottom="7dp"
         android:left="7dp"
@@ -15,9 +16,12 @@
     <!-- 设置圆角矩形 -->
     <corners android:radius="10dp" />
 
+    <!-- 边框 颜色-->
     <stroke
-        android:width="2px"
+        android:width="2dp"
         android:color="@color/colorEdiTextNormalStroke" />
+
+    <!-- 实心 背景色-->
     <solid android:color="@color/colorEdiTextBackground" />
 
 </shape>

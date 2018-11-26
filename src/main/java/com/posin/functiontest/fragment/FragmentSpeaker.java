@@ -71,6 +71,7 @@ public class FragmentSpeaker extends BaseFragment implements SeekBar.OnSeekBarCh
             if (mTitle[i].equals("喇叭") || mTitle[i].equals("Horn"))
                 mSpeakerPos = i;
         }
+
         mActivity.setTabReselectedListener(new TabReselectedListener() {
             @Override
             public void TabReselectedChange(int position) {
